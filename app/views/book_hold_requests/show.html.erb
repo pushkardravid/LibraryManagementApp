@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Student:</strong>
+  <%= @book_hold_request.student_id %>
+</p>
+
+<p>
+  <strong>Book:</strong>
+  <%= @book_hold_request.book_id %>
+</p>
+
+<p>
+  <strong>Library:</strong>
+  <%= @book_hold_request.library_id %>
+</p>
+
+<p>
+  <strong>Reason:</strong>
+  <%= @book_hold_request.reason %>
+</p>
+
+<%= link_to 'Edit', edit_book_hold_request_path(@book_hold_request) %> |
+<%= link_to 'Back', book_hold_requests_path %>

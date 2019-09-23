@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  student: one
+  book: one
+  active: false
+  issue_date: 2019-09-23
+
+two:
+  student: two
+  book: two
+  active: false
+  issue_date: 2019-09-23

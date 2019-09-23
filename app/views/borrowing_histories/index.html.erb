@@ -1,0 +1,33 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Borrowing Histories</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Student</th>
+      <th>Book</th>
+      <th>Active</th>
+      <th>Issue date</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @borrowing_histories.each do |borrowing_history| %>
+      <tr>
+        <td><%= borrowing_history.student_id %></td>
+        <td><%= borrowing_history.book_id %></td>
+        <td><%= borrowing_history.active %></td>
+        <td><%= borrowing_history.issue_date %></td>
+        <td><%= link_to 'Show', borrowing_history %></td>
+        <td><%= link_to 'Edit', edit_borrowing_history_path(borrowing_history) %></td>
+        <td><%= link_to 'Destroy', borrowing_history, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Borrowing History', new_borrowing_history_path %>
