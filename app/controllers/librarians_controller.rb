@@ -1,5 +1,6 @@
 class LibrariansController < ApplicationController
   before_action :set_librarian, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_librarian! unless :admin_signed_in?
 
   # GET /librarians
   # GET /librarians.json

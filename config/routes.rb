@@ -11,5 +11,7 @@ Rails.application.routes.draw do
   resources :librarians
   get 'admin_dashboard/' => 'admin_dashboard#index', :as => :admin_dashboard
   get 'approve_librarian/:id' => 'librarians#approve_librarian', :as => :approve_librarian
+  get 'librarian_dashboard/' => 'librarian_dashboard#index', :as => :librarian_dashboard
+  get 'student_dashboard/' => 'student_dashboard#index', :as => :student_dashboard
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
