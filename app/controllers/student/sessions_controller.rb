@@ -18,6 +18,9 @@ class Student::SessionsController < Devise::SessionsController
   #   super
   # end
 
+  def after_sign_in_path_for(resource)
+    '/students_search'
+  end
 
   # protected
 
