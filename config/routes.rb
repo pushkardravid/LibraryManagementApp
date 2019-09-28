@@ -5,9 +5,11 @@ Rails.application.routes.draw do
   devise_for :students, controllers: { sessions: 'student/sessions', registrations: 'student/registrations' }
   resources :borrowing_histories
   resources :book_hold_requests
-  resources :librarians
   resources :students
   resources :libraries
   resources :books
+  resources :librarians
+  get 'admin_dashboard/' => 'admin_dashboard#index', :as => :admin_dashboard
+  get 'approve_librarian/:id' => 'librarians#approve_librarian', :as => :approve_librarian
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

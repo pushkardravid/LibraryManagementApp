@@ -51,6 +51,14 @@ class LibrariansController < ApplicationController
     end
   end
 
+  def approve_librarian
+    librarian_id = params[:id]
+    librarian_obj = Librarian.where(id: librarian_id).first
+    librarian_obj.approved = true
+    librarian_obj.save
+    redirect_to('/admin_dashboard')
+  end
+  
   # DELETE /librarians/1
   # DELETE /librarians/1.json
   def destroy

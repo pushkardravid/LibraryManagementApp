@@ -21,6 +21,10 @@
     <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
   </div>
 
+  <div class="field">
+    <%= f.label :library_id %><br />
+    <%= f.text_field :library_id, autofocus: true, autocomplete: "library_id" %>
+  </div>
   <div class="actions">
     <%= f.submit "Sign up" %>
   </div>
