@@ -1,5 +1,6 @@
 <h2>Sign up</h2>
 
+
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
   <%= render "devise/shared/error_messages", resource: resource %>
 
@@ -21,9 +22,9 @@
     <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
   </div>
 
-  <div class="field">
+<div class="field">
     <%= f.label :university %><br />
-    <%= f.text_field :university, autofocus: true, autocomplete: "university" %>
+    <%= f.select :university_id, options_for_select(University.all.map{|s|[s.name, s.id]}) %>
   </div>
 
   <div class="actions">

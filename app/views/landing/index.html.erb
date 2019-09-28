@@ -53,7 +53,17 @@ a, a:visited{
 <div class="wrapper">
   <div class="message">
 
-  	<a href="/students/sign_in"><h1 align="center">Login</h1></a>
+  	<% if student_signed_in? %>
+  <li>
+  <%= link_to('Logout', destroy_student_session_path, method: :delete) %>        
+  </li>
+<% else %>
+  <li>
+  <%= link_to('Login', new_student_session_path) %>  
+  </li>
+<% end %>
+
+
   </div>
 </div>
 </body>

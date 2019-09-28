@@ -3,6 +3,7 @@
 class Student::RegistrationsController < Devise::RegistrationsController
   before_action :configure_sign_up_params, only: [:create]
   # before_action :configure_account_update_params, only: [:update]
+  before_action :get_all_universities
 
   # GET /resource/sign_up
   # def new
@@ -43,7 +44,7 @@ class Student::RegistrationsController < Devise::RegistrationsController
   # If you have extra params to permit, append them to the sanitizer.
   def configure_sign_up_params
     puts 'here'
-    devise_parameter_sanitizer.permit(:sign_up, keys: [:email, :password, :university])
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:email, :password, :university_id])
   end
 
   # If you have extra params to permit, append them to the sanitizer.
@@ -52,12 +53,16 @@ class Student::RegistrationsController < Devise::RegistrationsController
   # end
 
   # The path used after sign up.
-  # def after_sign_up_path_for(resource)
-  #   super(resource)
-  # end
+  def after_sign_up_path_for(resource)
+     '/books'
+  end
 
   # The path used after sign up for inactive accounts.
   # def after_inactive_sign_up_path_for(resource)
   #   super(resource)
   # end
+
+  def get_all_universities
+    @universities = University.all()
+  end
 end
