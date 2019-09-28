@@ -12,6 +12,6 @@ Rails.application.routes.draw do
   get 'admin_dashboard/' => 'admin_dashboard#index', :as => :admin_dashboard
   get 'approve_librarian/:id' => 'librarians#approve_librarian', :as => :approve_librarian
   get 'search/' => 'books#search', :as => :search
-  post 'bookmark' => 'books#bookmark', :as => :bookmark
+  get 'bookmark/' => 'books#bookmark', :as => :bookmark
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

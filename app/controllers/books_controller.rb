@@ -1,5 +1,5 @@
 class BooksController < ApplicationController
-  before_action :set_book, only: [:show, :edit, :update, :destroy]
+  before_action :set_book, only: [:show, :edit, :update, :destroy, :bookmark]
   # GET /books
   # GET /books.json
   def index
@@ -20,8 +20,18 @@ class BooksController < ApplicationController
   end
 
   def bookmark
+    #student_id = session[:user_id]
+    student_id = 1  # TODO
     @student_bookmark = StudentBookmark.new
-    #Student.find()
+    @student_bookmark.student_id = student_id
+    @student_bookmark.book_id = @book.id
+    if @student_bookmark.save
+      flash[:notice] =  "Book successfully bookmarked."
+    else
+      flash[:error] =  "Error occurred while bookmarking requested book."
+    end
+    redirect_to request.referrer
+    #render :nothing => true
   end
 
   # GET /books/new
