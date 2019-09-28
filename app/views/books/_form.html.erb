@@ -56,6 +56,16 @@
     <%= form.check_box :special %>
   </div>
 
+  <div class="field">
+    <%= form.label :quantity %>
+    <%= text_field_tag :quantity %>
+  </div>
+
+  <div class="field">
+    <%= form.label :library %>
+    <%= select_tag "library", options_from_collection_for_select(Library.all, "id", "name") %>
+  </div>
+
   <div class="actions">
     <%= form.submit %>
   </div>

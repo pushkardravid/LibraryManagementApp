@@ -1,6 +1,5 @@
 class BooksController < ApplicationController
   before_action :set_book, only: [:show, :edit, :update, :destroy]
-
   # GET /books
   # GET /books.json
   def index
@@ -10,6 +9,19 @@ class BooksController < ApplicationController
   # GET /books/1
   # GET /books/1.json
   def show
+  end
+
+  def search
+    if params[:search].nil?
+      redirect_to books_url, alert: 'Search criteria cannot be empty.'
+    else 
+      @search_results = Book.search(params["search_by"].downcase, params[:search])
+    end
+  end
+
+  def bookmark
+    @student_bookmark = StudentBookmark.new
+    #Student.find()
   end
 
   # GET /books/new
@@ -24,15 +36,30 @@ class BooksController < ApplicationController
   # POST /books
   # POST /books.json
   def create
-    @book = Book.new(book_params)
-
+    @book = Book.new
+    @book.isbn = params[:book][:isbn]
+    @book.title = params[:book][:title]
+    @book.language = params[:book][:language]
+    @book.published = params[:book][:published]
+    @book.edition = params[:book][:edition]
+    @book.image = params[:book][:image]
+    @book.subject = params[:book][:subject]
+    @book.summary = params[:book][:summary]
+    @book.special = params[:book][:special]
+    
     respond_to do |format|
       if @book.save
+        @book_library_mapping = BookLibraryMapping.new    
+        @book_library_mapping.book_id = @book.id
+        @book_library_mapping.quantity = params[:quantity]
+        @book_library_mapping.library_id = params[:library]
+        @book_library_mapping.save
+
         format.html { redirect_to @book, notice: 'Book was successfully created.' }
         format.json { render :show, status: :created, location: @book }
       else
         format.html { render :new }
-        format.json { render json: @book.errors, status: :unprocessable_entity }
+        format.json { render json: @book.errors + @book_library_mapping.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -70,5 +97,8 @@ class BooksController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def book_params
       params.require(:book).permit(:isbn, :title, :language, :published, :edition, :image, :subject, :summary, :special)
+      params.require(:library)
+      params.require(:quantity)
     end
+
 end
