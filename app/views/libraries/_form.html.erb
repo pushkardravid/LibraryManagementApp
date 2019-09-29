@@ -31,6 +31,11 @@
     <%= form.number_field :overdue_fines %>
   </div>
 
+  <div class="field">
+    <%= form.label :university_id %>
+    <%= select("library", "university_id", University.all.collect{ |u| [ u.name, u.id] }) %>
+  </div>
+
   <div class="actions">
     <%= form.submit %>
   </div>

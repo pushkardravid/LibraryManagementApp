@@ -9,5 +9,11 @@
 university = University.create([{name:'North Carolina State University',state:'North Carolina'}])
 university = University.create([{name:'University of North Carolina Chapell Hill',state:'North Carolina'}])
 university = University.create([{name:'Duke University',state:'North Carolina'}])
+university = University.create([{name:'Stanford University',state:'California'}])
 
-library = Library.create([{name:'Hunt', location:'Centennial Campus'}])
+
+library = Library.create([{name:'Hunt Library', location:'Centennial Campus, Raleigh'}])
+library = Library.create([{name:'Hill Library', location:'Main Campus, Raleigh'}])
+library = Library.create([{name:'OT Library', location:'California'}])
+library = Library.create([{name:'SU Library', location:'California'}])
+library = Library.create([{name:'Chapell Library', location:'Chapell Hill'}])

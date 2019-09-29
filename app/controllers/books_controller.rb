@@ -3,14 +3,20 @@ class BooksController < ApplicationController
   # GET /books
   # GET /books.json
   def index
-    # #student_id = session[:user_id] 
-    # student_id = 1  # TODO
-    # if current_student
-    #   @books = Book.all
-    #   Library.where('university_id = ?', Student.find(student_id).university_id).each { |library_id| 
-
-    #   }
-    @books = Book.all
+    #student_id = session[:user_id] 
+    student_id = 1  # TODO
+    @books = Array.new
+    if current_student
+      # puts Book.all.class
+      # Library.where('university_id = ?', Student.find(student_id).university_id).each { |library| 
+      #   BookLibraryMapping.where('library_id = ?', library.id).each { |book_library|
+      #     @books.push(Book.find(book_library.book_id))
+      #     # puts Book.find(book_library.book_id)
+      #     puts "Here"
+      #   }
+      # }
+      puts Library.where('university_id = ?', Student.find(student_id).length
+    end
   end
 
   # GET /books/1
@@ -35,7 +41,7 @@ class BooksController < ApplicationController
     if @student_bookmark.save
       flash[:notice] =  "Book successfully bookmarked."
     else
-      flash[:error] =  "Error occurred while bookmarking requested book."
+    flash[:error] =  "Error occurred while bookmarking requested book."
     end
     redirect_to request.referrer
     #render :nothing => true

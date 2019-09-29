@@ -13,5 +13,6 @@ class ApplicationController < ActionController::Base
 		end
 
 		@current_user = user
+		puts @current_user
 	end
 end
