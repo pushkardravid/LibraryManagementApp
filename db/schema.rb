@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_28_073103) do
+ActiveRecord::Schema.define(version: 2019_09_28_235333) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -114,6 +114,8 @@ ActiveRecord::Schema.define(version: 2019_09_28_073103) do
     t.integer "overdue_fines"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "university_id"
+    t.index ["university_id"], name: "index_libraries_on_university_id"
   end
 
   create_table "student_bookmarks", force: :cascade do |t|
@@ -159,6 +161,7 @@ ActiveRecord::Schema.define(version: 2019_09_28_073103) do
   add_foreign_key "borrowing_histories", "books"
   add_foreign_key "borrowing_histories", "students"
   add_foreign_key "librarians", "libraries"
+  add_foreign_key "libraries", "universities"
   add_foreign_key "student_bookmarks", "books"
   add_foreign_key "student_bookmarks", "students"
   add_foreign_key "students", "universities"

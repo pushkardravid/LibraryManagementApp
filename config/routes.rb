@@ -14,6 +14,6 @@ Rails.application.routes.draw do
   get 'librarian_dashboard/' => 'librarian_dashboard#index', :as => :librarian_dashboard
   get 'student_dashboard/' => 'student_dashboard#index', :as => :student_dashboard
   get 'search/' => 'books#search', :as => :search
-  post 'bookmark' => 'books#bookmark', :as => :bookmark
+  get 'bookmark/' => 'books#bookmark', :as => :bookmark
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
