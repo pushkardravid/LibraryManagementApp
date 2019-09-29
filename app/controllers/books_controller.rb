@@ -64,6 +64,10 @@ class BooksController < ApplicationController
   end
 
   def checkout_book
+    if BorrowingHistory.fetch_all_active_books_by_student(current_student.id).count >= @books_per_educational_level[current_student.educational_level]
+      return request_book
+    end
+
     @borrowing_history = BorrowingHistory.new
 
     @borrowing_history.student_id = current_student.id 
@@ -82,10 +86,40 @@ class BooksController < ApplicationController
   end
 
   def request_book
+    @book_hold_request = BookHoldRequest.new
+
+    @book_hold_request.student_id = current_student.id
+    @book_hold_request.book_id = @book.id
+    @book_hold_request.library_id = BookLibraryMapping.fetch_library_for_book(@book.id)
+
+    if @book.special
+      @book_hold_request.reason = "special"
+    elsif BookLibraryMapping.fetch_book_quantity(@book.id) == 0
+      @book_hold_request.reason = "unavailable"
+    else
+      @book_hold_request.reason = "max_reached"
+    end
+
+    if @book_hold_request.save
+      flash[:notice] =  "Book was successfully requested."
+    else
+      flash[:error] =  "Error occurred while requesting book."
+    end
+
     redirect_to request.referrer
   end
 
   def return_book
+    @borrowing_history = BorrowingHistory.fetch_specific_active_book(current_student.id, @book.id)
+    
+    if !@borrowing_history.nil?
+      BookLibraryMapping.increment_quantity(@book.id)
+      @borrowing_history.update_attributes(:active => false)
+      flash[:notice] =  "Book was successfully returned."
+    else
+      flash[:error] =  "Error occurred while returning the requested book."
+    end
+
     redirect_to request.referrer
   end
 
@@ -146,7 +180,7 @@ class BooksController < ApplicationController
 
   # DELETE /books/1
   # DELETE /books/1.json
-  # TODO Param Change
+  # TODO Foreign key delete book_library_mappings
   def destroy
     @book.destroy
     respond_to do |format|
