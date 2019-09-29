@@ -1,12 +1,18 @@
 class BooksController < ApplicationController
   before_action :set_book, only: [:show, :edit, :update, :destroy, :bookmark]
+  before_action :test_user
+
+	def test_user
+		if not (admin_signed_in? or student_signed_in?)
+			redirect_to('/students/sign_in')
+		end
+  end
+  
   # GET /books
   # GET /books.json
   def index
-    #student_id = session[:user_id] 
-    student_id = 1  # TODO
-    current_student = true #TODO
-    if current_student 
+    if current_student
+      student_id = current_student.id 
       @books = Book.fetch_books_by_university(student_id)  
     elsif current_admin
       @books = Book.all
