@@ -13,7 +13,7 @@ class BooksController < ApplicationController
   def index
     if current_student
       student_id = current_student.id 
-      @books = Book.fetch_books_by_university(student_id)  
+      @books = Book.fetch_books_by_university(student_id)
     elsif current_admin
       @books = Book.all
     end
@@ -32,16 +32,19 @@ class BooksController < ApplicationController
     end
   end
 
-  def bookmark
-    #student_id = session[:user_id]
-    student_id = 1  # TODO
-    @student_bookmark = StudentBookmark.new
-    @student_bookmark.student_id = student_id
-    @student_bookmark.book_id = @book.id
-    if @student_bookmark.save
-      flash[:notice] =  "Book successfully bookmarked."
+  def bookmark_toggle
+    if current_student and StudentBookmark.where(:book_id => params[:id]).count == 0
+      student_id = current_student.id 
+      @student_bookmark = StudentBookmark.new
+      @student_bookmark.student_id = student_id
+      @student_bookmark.book_id = params[:id]
+      if @student_bookmark.save
+        flash[:notice] =  "Book successfully bookmarked."
+      else
+        flash[:error] =  "Error occurred while bookmarking requested book."
+      end
     else
-    flash[:error] =  "Error occurred while bookmarking requested book."
+      StudentBookmark.where(:book_id => params[:id]).first.destroy
     end
     redirect_to request.referrer
     #render :nothing => true
