@@ -1,5 +1,6 @@
 class BooksController < ApplicationController
-  before_action :set_book, only: [:show, :edit, :update, :destroy, :bookmark]
+  require 'date'
+  before_action :set_book, only: [:show, :edit, :update, :destroy, :bookmark_toggle, :checkout_book, :request_book, :return_book]
   before_action :test_user
 
 	def test_user
@@ -16,6 +17,7 @@ class BooksController < ApplicationController
       @books = Book.fetch_books_by_university(student_id)
     elsif current_admin
       @books = Book.all
+      #.paginate(page: params[:page], per_page: 5)
     end
   end
 
@@ -35,8 +37,7 @@ class BooksController < ApplicationController
   def view_bookmarks
     if current_student
       student_id = current_student.id
-      @books_with_bookmarks = Book.where('id = ?', StudentBookmark.where(:student_id => student_id).book_id)
-
+      @books_with_bookmarks = Book.where( id: StudentBookmark.where(:student_id => student_id).book_id)
     else
       @books_with_bookmarks = Book.where('id = ?', StudentBookmark.all.book_id)
     end
@@ -46,8 +47,10 @@ class BooksController < ApplicationController
     student_id = current_student.id 
     if StudentBookmark.where(:book_id => params[:id]).count == 0
       @student_bookmark = StudentBookmark.new
+
       @student_bookmark.student_id = student_id
       @student_bookmark.book_id = params[:id]
+
       if @student_bookmark.save
         flash[:notice] =  "Book successfully bookmarked."
       else
@@ -56,8 +59,34 @@ class BooksController < ApplicationController
     else
       StudentBookmark.where(:book_id => params[:id], :student_id => student_id).first.destroy
     end
+
     redirect_to request.referrer
-    #render :nothing => true
+  end
+
+  def checkout_book
+    @borrowing_history = BorrowingHistory.new
+
+    @borrowing_history.student_id = current_student.id 
+    @borrowing_history.book_id = @book.id
+    @borrowing_history.active = true
+    @borrowing_history.issue_date = Date.today
+
+    if @borrowing_history.save
+      BookLibraryMapping.decrement_quantity(@book.id)
+      flash[:notice] =  "Book was successfully checked out."
+    else
+      flash[:error] =  "Error occurred while checking out."
+    end
+
+    redirect_to request.referrer
+  end
+
+  def request_book
+    redirect_to request.referrer
+  end
+
+  def return_book
+    redirect_to request.referrer
   end
 
   # GET /books/new
@@ -95,13 +124,14 @@ class BooksController < ApplicationController
         format.json { render :show, status: :created, location: @book }
       else
         format.html { render :new }
-        format.json { render json: @book.errors + @book_library_mapping.errors, status: :unprocessable_entity }
+        format.json { render json: @book.errors, status: :unprocessable_entity }
       end
     end
   end
 
   # PATCH/PUT /books/1
   # PATCH/PUT /books/1.json
+  # TODO Param Change
   def update
     respond_to do |format|
       if @book.update(book_params)
@@ -116,6 +146,7 @@ class BooksController < ApplicationController
 
   # DELETE /books/1
   # DELETE /books/1.json
+  # TODO Param Change
   def destroy
     @book.destroy
     respond_to do |format|
