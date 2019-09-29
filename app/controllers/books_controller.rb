@@ -32,9 +32,18 @@ class BooksController < ApplicationController
     end
   end
 
+  def view_bookmarks
+    if current_student
+      student_id = current_student.id
+      @bookmarks = StudentBookmark.where(:student_id => student_id)
+    else
+      @bookmarks = StudentBookmark.all
+    end
+  end
+
   def bookmark_toggle
-    if current_student and StudentBookmark.where(:book_id => params[:id]).count == 0
-      student_id = current_student.id 
+    student_id = current_student.id 
+    if StudentBookmark.where(:book_id => params[:id]).count == 0
       @student_bookmark = StudentBookmark.new
       @student_bookmark.student_id = student_id
       @student_bookmark.book_id = params[:id]
@@ -44,7 +53,7 @@ class BooksController < ApplicationController
         flash[:error] =  "Error occurred while bookmarking requested book."
       end
     else
-      StudentBookmark.where(:book_id => params[:id]).first.destroy
+      StudentBookmark.where(:book_id => params[:id], :student_id => student_id).first.destroy
     end
     redirect_to request.referrer
     #render :nothing => true
