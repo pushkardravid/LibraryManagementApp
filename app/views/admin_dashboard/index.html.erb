@@ -9,13 +9,19 @@
 		</tr>
 	</thead>
 	<tbody>
+
 		<% @pending_librarians.each do |users| %>
   			<tr>
   				<td><%= users.email %></td>
   				<td><a href="/approve_librarian/<%= users.id %>">Approve</a></td>
-  				
+
+
+
   			</tr>
+
 		<% end %>
+
+		<%= link_to "View all students", "/students" %>
 	</tbody>
-</table>	
+</table>
 </div>
