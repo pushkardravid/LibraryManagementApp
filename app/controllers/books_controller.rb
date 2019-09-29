@@ -3,6 +3,13 @@ class BooksController < ApplicationController
   # GET /books
   # GET /books.json
   def index
+    # #student_id = session[:user_id] 
+    # student_id = 1  # TODO
+    # if current_student
+    #   @books = Book.all
+    #   Library.where('university_id = ?', Student.find(student_id).university_id).each { |library_id| 
+
+    #   }
     @books = Book.all
   end
 
