@@ -5,17 +5,11 @@ class BooksController < ApplicationController
   def index
     #student_id = session[:user_id] 
     student_id = 1  # TODO
-    @books = Array.new
-    if current_student
-      # puts Book.all.class
-      # Library.where('university_id = ?', Student.find(student_id).university_id).each { |library| 
-      #   BookLibraryMapping.where('library_id = ?', library.id).each { |book_library|
-      #     @books.push(Book.find(book_library.book_id))
-      #     # puts Book.find(book_library.book_id)
-      #     puts "Here"
-      #   }
-      # }
-      puts Library.where('university_id = ?', Student.find(student_id).length
+    current_student = true #TODO
+    if current_student 
+      @books = Book.fetch_books_by_university(student_id)  
+    elsif current_admin
+      @books = Book.all
     end
   end
 
