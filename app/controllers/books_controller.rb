@@ -35,9 +35,10 @@ class BooksController < ApplicationController
   def view_bookmarks
     if current_student
       student_id = current_student.id
-      @bookmarks = StudentBookmark.where(:student_id => student_id)
+      @books_with_bookmarks = Book.where('id = ?', StudentBookmark.where(:student_id => student_id).book_id)
+
     else
-      @bookmarks = StudentBookmark.all
+      @books_with_bookmarks = Book.where('id = ?', StudentBookmark.all.book_id)
     end
   end
 
