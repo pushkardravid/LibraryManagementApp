@@ -2,8 +2,8 @@ class BorrowingHistory < ApplicationRecord
   belongs_to :student
   belongs_to :book
 
-  def self.is_book_active?(book_id)
-    book = self.find_by book_id: book_id
+  def self.is_book_active?(student_id, book_id)
+    book = where('student_id = :student_id AND book_id = :book_id', student_id: "#{student_id}", book_id: "#{book_id}").first
     if !book.nil?
       book.active
     else

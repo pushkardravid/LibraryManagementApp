@@ -51,7 +51,7 @@
         <td><%= link_to 'Unbookmark', bookmark_path(book) %></td>
         <% end %>
 
-        <% if BorrowingHistory.is_book_active?(book.id)%>
+        <% if BorrowingHistory.is_book_active?(student_id, book.id)%>
         <td><%= button_to 'Return', return_path(book) %></td>
         <% else %>
         <% if BookLibraryMapping.fetch_book_quantity(book.id) != 0 and !book.special%>
