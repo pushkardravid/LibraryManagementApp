@@ -57,7 +57,11 @@
         <% if BookLibraryMapping.fetch_book_quantity(book.id) != 0 and !book.special%>
         <td><%= button_to 'Checkout', checkout_path(book) %></td>
         <% else %>
+        <% if BookHoldRequest.is_requested?(current_student.id, book.id)%>
+        <td><%= button_to 'Cancel Request', request_path(book) %></td>
+        <% else %>
         <td><%= button_to 'Request', request_path(book) %></td>
+        <% end %>
         <% end %>
         <% end %>
         <% end %>

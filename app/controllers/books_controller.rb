@@ -86,24 +86,32 @@ class BooksController < ApplicationController
   end
 
   def request_book
-    @book_hold_request = BookHoldRequest.new
+    
+    student_id = current_student.id
+    book_id = @book.id
 
-    @book_hold_request.student_id = current_student.id
-    @book_hold_request.book_id = @book.id
-    @book_hold_request.library_id = BookLibraryMapping.fetch_library_for_book(@book.id)
-
-    if @book.special
-      @book_hold_request.reason = "special"
-    elsif BookLibraryMapping.fetch_book_quantity(@book.id) == 0
-      @book_hold_request.reason = "unavailable"
+    if BookHoldRequest.where(:student_id => student_id, :book_id => book_id).length != 0
+      BookHoldRequest.where(:student_id => student_id, :book_id => book_id).first.destroy
     else
-      @book_hold_request.reason = "max_reached"
-    end
 
-    if @book_hold_request.save
-      flash[:notice] =  "Book was successfully requested."
-    else
-      flash[:error] =  "Error occurred while requesting book."
+      @book_hold_request = BookHoldRequest.new
+      @book_hold_request.student_id = current_student.id
+      @book_hold_request.book_id = @book.id
+      @book_hold_request.library_id = BookLibraryMapping.fetch_library_for_book(@book.id)
+
+      if @book.special
+        @book_hold_request.reason = "special"
+      elsif BookLibraryMapping.fetch_book_quantity(@book.id) == 0
+        @book_hold_request.reason = "unavailable"
+      else
+        @book_hold_request.reason = "max_reached"
+      end
+      
+      if @book_hold_request.save
+        flash[:notice] =  "Book was successfully requested."
+      else
+        flash[:error] =  "Error occurred while requesting book."
+      end
     end
 
     redirect_to request.referrer
