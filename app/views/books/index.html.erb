@@ -45,6 +45,7 @@
         <% if current_admin or current_librarian%>
         <td><%= link_to 'Edit', edit_book_path(book) %></td>
         <% end %>
+
         <% if student_signed_in? %>
 
         <% if StudentBookmark.where(:book_id => book.id, :student_id => current_student.id).length == 0 %>
@@ -59,12 +60,16 @@
         <% if BookLibraryMapping.fetch_book_quantity(book.id) != 0 and !book.special%>
         <td><%= button_to 'Checkout', checkout_path(book) %></td>
         <% else %>
+        <% if BookHoldRequest.is_requested?(current_student.id, book.id)%>
+        <td><%= button_to 'Cancel Request', request_path(book) %></td>
+        <% else %>
         <td><%= button_to 'Request', request_path(book) %></td>
         <% end %>
         <% end %>
         <% end %>
-
-        <% if current_admin%>
+        <% end %>
+        
+        <% if current_admin%>        
         <td><%= link_to 'Destroy', book, method: :delete, data: { confirm: 'Are you sure?' } %></td>
         <% end %>
       </tr>

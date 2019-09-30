@@ -1,5 +1,5 @@
 class BookHoldRequestsController < ApplicationController
-  before_action :set_book_hold_request, only: [:show, :edit, :update, :destroy]
+  before_action :set_book_hold_request, only: [:show, :edit, :update, :destroy, :approve]
 
   # GET /book_hold_requests
   # GET /book_hold_requests.json
@@ -59,6 +59,12 @@ class BookHoldRequestsController < ApplicationController
       format.html { redirect_to book_hold_requests_url, notice: 'Book hold request was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def approve
+    book_id = @book_hold_request.book_id
+    @book_hold_request.destroy
+    BooksController.new.checkout_book
   end
 
   private
