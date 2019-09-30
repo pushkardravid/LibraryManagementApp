@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
 	before_action :get_user
 	
-	@books_per_educational_level = {:undergraduate => 3, :graduate => 5, :phd => 8}.freeze
+	BOOK_SPECIFICATIONS = {:undergraduate => 3, :graduate => 5, :phd => 8}.freeze
 
 
 	def get_user

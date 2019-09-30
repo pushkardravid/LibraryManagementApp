@@ -2,13 +2,14 @@
 
 <h2>Search Book</h2>
 <div>
-<%= form_tag(search_path, :method => "get") do %>
+<%= form_tag(books_url, :method => "get") do %>
   <%= select_tag "search_by", options_for_select([ "Title", "Author", "Subject", "Publication Date" ], "Title") %>
   <%= text_field_tag :search, nil, placeholder: "Search.." %>
   <%= submit_tag 'Search', name: nil %>
 <% end %>
-
+<% if current_admin%>
 <%= link_to 'New Book', new_book_path %>
+<% end%>
 </div>
 
 
@@ -40,9 +41,10 @@
         <td><%= book.subject %></td>
         <td><%= book.summary %></td>
         <td><%= book.special %></td>
-        <td><%= link_to 'Show', book %></td>
+        <td><%= link_to 'Details', book %></td>
+        <% if current_admin or current_librarian%>
         <td><%= link_to 'Edit', edit_book_path(book) %></td>
-        
+        <% end %>
         <% if student_signed_in? %>
 
         <% if StudentBookmark.where(:book_id => book.id, :student_id => current_student.id).length == 0 %>
@@ -51,7 +53,7 @@
         <td><%= link_to 'Unbookmark', bookmark_path(book) %></td>
         <% end %>
 
-        <% if BorrowingHistory.is_book_active?(student_id, book.id)%>
+        <% if BorrowingHistory.is_book_active?(current_student.id, book.id)%>
         <td><%= button_to 'Return', return_path(book) %></td>
         <% else %>
         <% if BookLibraryMapping.fetch_book_quantity(book.id) != 0 and !book.special%>
@@ -61,8 +63,10 @@
         <% end %>
         <% end %>
         <% end %>
-        
+
+        <% if current_admin%>
         <td><%= link_to 'Destroy', book, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% end %>
       </tr>
     <% end %>
   </tbody>

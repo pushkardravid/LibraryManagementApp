@@ -11,27 +11,23 @@ class BooksController < ApplicationController
   
   # GET /books
   # GET /books.json
+  # TODO .paginate(page: params[:page], per_page: 5)
   def index
     if current_student
       student_id = current_student.id 
       @books = Book.fetch_books_by_university(student_id)
     elsif current_admin
       @books = Book.all
-      #.paginate(page: params[:page], per_page: 5)
+    end
+
+    if !params[:search].nil?
+      @books = @books & Book.search(params["search_by"].downcase, params[:search])
     end
   end
 
   # GET /books/1
   # GET /books/1.json
   def show
-  end
-
-  def search
-    if params[:search].nil?
-      redirect_to books_url, alert: 'Search criteria cannot be empty.'
-    else 
-      @search_results = Book.search(params["search_by"].downcase, params[:search])
-    end
   end
 
   def view_bookmarks
@@ -42,6 +38,8 @@ class BooksController < ApplicationController
       @books_with_bookmarks = Book.where('id = ?', StudentBookmark.all.book_id)
     end
   end
+
+
 
   def bookmark_toggle
     student_id = current_student.id 
@@ -63,8 +61,13 @@ class BooksController < ApplicationController
     redirect_to request.referrer
   end
 
+
+
   def checkout_book
-    if BorrowingHistory.fetch_all_active_books_by_student(current_student.id).count >= @books_per_educational_level[current_student.educational_level]
+    student_borrowed_books_count = BorrowingHistory.fetch_all_active_books_by_student(current_student.id).count
+    #ApplicationController::BOOK_SPECIFICATIONS[Student.get_educational_level(current_student.educational_level)]
+    
+    if student_borrowed_books_count >= 10
       return request_book
     end
 
@@ -84,6 +87,8 @@ class BooksController < ApplicationController
 
     redirect_to request.referrer
   end
+
+
 
   def request_book
     @book_hold_request = BookHoldRequest.new
@@ -109,6 +114,8 @@ class BooksController < ApplicationController
     redirect_to request.referrer
   end
 
+
+
   def return_book
     @borrowing_history = BorrowingHistory.fetch_specific_active_book(current_student.id, @book.id)
     
@@ -122,6 +129,8 @@ class BooksController < ApplicationController
 
     redirect_to request.referrer
   end
+
+
 
   # GET /books/new
   def new
