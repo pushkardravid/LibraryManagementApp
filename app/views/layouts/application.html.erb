@@ -26,6 +26,7 @@
         <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
       </li>
       
+      <% if !admin_signed_in? and !librarian_signed_in? and !student_signed_in? %>
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownStudent" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           Student
@@ -55,7 +56,7 @@
           <a class="dropdown-item" href="/librarians/sign_up">Sign-up</a>
         </div>
       </li>
-
+<% end %>
 <li class="nav-item active" style="padding-left:100%">
       <% if @current_user %>
   <% if @current_user == 'student' %>
