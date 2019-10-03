@@ -65,9 +65,9 @@ class BooksController < ApplicationController
 
   def checkout_book
     student_borrowed_books_count = BorrowingHistory.fetch_all_active_books_by_student(current_student.id).count
-    #ApplicationController::BOOK_SPECIFICATIONS[Student.get_educational_level(current_student.educational_level)]
+    student_allowed_count = StaticData::BOOK_SPECIFICATIONS[current_student.educational_level.to_sym]
     
-    if student_borrowed_books_count >= 10
+    if student_borrowed_books_count >= student_allowed_count
       return request_book
     end
 

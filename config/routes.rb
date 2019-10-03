@@ -19,5 +19,4 @@ Rails.application.routes.draw do
   get 'bookmarks/:id' => 'books#bookmark_toggle', :as => :bookmark
   get 'bookmarks/' => 'books#view_bookmarks', :as => :get_bookmark
   get 'book_hold_request_approve/:id' => 'book_hold_requests#approve', :as => :approve_book_hold_request
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
