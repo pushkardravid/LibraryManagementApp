@@ -32,9 +32,10 @@
   </div>
 
   <div class="field">
-    <%= form.label :university_id %>
-    <%= form.text_field :university_id %>
+    <%= form.label :university %>
+    <%= select_tag "university", options_from_collection_for_select(University.all, "id", "name") %>
   </div>
+
 
   <div class="field">
     <%= form.label :max_books_blocking %>

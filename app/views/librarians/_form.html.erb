@@ -26,9 +26,10 @@
     <%= form.text_field :password %>
   </div>
 
+
   <div class="field">
-    <%= form.label :library_id %>
-    <%= form.text_field :library_id %>
+    <%= form.label :library %>
+    <%= select_tag "library", options_from_collection_for_select(Library.all, "id", "name") %>
   </div>
 
   <div class="actions">

@@ -9,14 +9,19 @@ Rails.application.routes.draw do
   resources :libraries
   resources :books
   resources :librarians
+
+  get '/home/' => 'application#home'
   get 'admin_dashboard/' => 'admin_dashboard#index', :as => :admin_dashboard
   get 'approve_librarian/:id' => 'librarians#approve_librarian', :as => :approve_librarian
   get 'librarian_dashboard/' => 'librarian_dashboard#index', :as => :librarian_dashboard
   get 'student_dashboard/' => 'student_dashboard#index', :as => :student_dashboard
+
   post 'checkout/:id' => 'books#checkout_book', :as => :checkout
   post 'request/:id' => 'books#request_book', :as => :request
   post 'return/:id' => 'books#return_book', :as => :return
   get 'bookmarks/:id' => 'books#bookmark_toggle', :as => :bookmark
   get 'bookmarks/' => 'books#view_bookmarks', :as => :get_bookmark
   get 'book_hold_request_approve/:id' => 'book_hold_requests#approve', :as => :approve_book_hold_request
+
+  get 'librarian_approval/' => 'admin_dashboard#librarian_approval', :as => :librarian_approval
 end

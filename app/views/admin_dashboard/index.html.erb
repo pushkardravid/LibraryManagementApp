@@ -1,27 +1,8 @@
 
-<div class="container">
 
-<table class="table table-striped">
-	<thead>
-		<tr>
-			<th>Email</th>
-			<th>Approve/Decline</th>
-		</tr>
-	</thead>
-	<tbody>
-
-		<% @pending_librarians.each do |users| %>
-  			<tr>
-  				<td><%= users.email %></td>
-  				<td><a href="/approve_librarian/<%= users.id %>">Approve</a></td>
-
-
-
-  			</tr>
-
-		<% end %>
-
-		<%= link_to "View all students", "/students" %>
-	</tbody>
-</table>
-</div>
+<%= link_to "View pending librarian request", librarian_approval_path %><br/>
+<%= link_to "View all students", students_path %><br/>
+<%= link_to "Create a student", new_student_path %><br/>
+<%= link_to "View all librarians", librarians_path %><br/>
+<%= link_to "Create a student", new_librarian_path %><br/>
+<%= link_to "View all books", books_path %><br/>

@@ -1,0 +1,26 @@
+<div class="container">
+
+<table class="table table-striped">
+	<thead>
+		<tr>
+			<th>Email</th>
+			<th>Approve/Decline</th>
+		</tr>
+	</thead>
+	<tbody>
+
+		<% @pending_librarians.each do |users| %>
+  			<tr>
+  				<td><%= users.email %></td>
+  				<td><a href="/approve_librarian/<%= users.id %>">Approve</a></td>
+
+
+
+  			</tr>
+
+		<% end %>
+
+		
+	</tbody>
+</table>
+</div>
