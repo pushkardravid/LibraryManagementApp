@@ -1,5 +1,21 @@
 Admin.create!([
-  {email: "admin@system.com", encrypted_password: "$2a$11$xaLtehPsooLzOMbv8aM5Ve9PLg9Ycbnw66RXOza4HxUqlThcDg11G", reset_password_token: nil, reset_password_sent_at: nil, remember_created_at: nil, name: "admin"}
+  {email: "admin@system.com", password: "password", encrypted_password: "$2a$11$xaLtehPsooLzOMbv8aM5Ve9PLg9Ycbnw66RXOza4HxUqlThcDg11G", reset_password_token: nil, reset_password_sent_at: nil, remember_created_at: nil, name: "admin"}
+])
+University.create!([
+  {name: "North Carolina State University", state: "North Carolina"},
+  {name: "University of North Carolina - Chapell Hill", state: "North Carolina"},
+  {name: "Duke University", state: "North Carolina"},
+  {name: "University of North Carolina - Charlotte", state: "North Carolina"},
+  {name: "Wake Forest University", state: "California"}
+])
+Library.create!([
+  {name: "Hunt Library", location: "Centennial Campus, Raleigh", max_days_blocking: 20, overdue_fines: 2, university_id: 1},
+  {name: "Hill Library", location: "Main Campus, Raleigh", max_days_blocking: 20, overdue_fines: 2, university_id: 1},
+  {name: "Davis Library", location: "Chapell Hill", max_days_blocking: 10, overdue_fines: 5, university_id: 2},
+  {name: "Wilson Library", location: "Chapell Hill", max_days_blocking: 10, overdue_fines: 5, university_id: 2},
+  {name: "J. Murrey Atkins Library", location: "Charlotte", max_days_blocking: 20, overdue_fines: 1, university_id: 4},
+  {name: "Duke Kunshan Library", location: "Durham", max_days_blocking: 20, overdue_fines: 1, university_id: 3},
+  {name: "ZSR Library", location: "Wake County", max_days_blocking: 20, overdue_fines: 1, university_id: 5}
 ])
 Book.create!([
   {isbn: "1230456789", title: "DAA Cormen", language: "English", published: "2003", edition: "3", image: "", subject: "Computer Science, Discrete Mathematics, Computer Engineering", summary: "Introduction to Design and Analysis of Algorithms", special: false},
@@ -20,20 +36,4 @@ BookLibraryMapping.create!([
   {book_id: 6, library_id: 5, quantity: 5},
   {book_id: 7, library_id: 6, quantity: 6},
   {book_id: 8, library_id: 5, quantity: 4}
-])
-Library.create!([
-  {name: "Hunt Library", location: "Centennial Campus, Raleigh", max_days_blocking: 20, overdue_fines: 2, university_id: 1},
-  {name: "Hill Library", location: "Main Campus, Raleigh", max_days_blocking: 20, overdue_fines: 2, university_id: 1},
-  {name: "Davis Library", location: "Chapell Hill", max_days_blocking: 10, overdue_fines: 5, university_id: 2},
-  {name: "Wilson Library", location: "Chapell Hill", max_days_blocking: 10, overdue_fines: 5, university_id: 2},
-  {name: "J. Murrey Atkins Library", location: "Charlotte", max_days_blocking: 20, overdue_fines: 1, university_id: 4},
-  {name: "Duke Kunshan Library", location: "Durham", max_days_blocking: 20, overdue_fines: 1, university_id: 3},
-  {name: "ZSR Library", location: "Wake County", max_days_blocking: 20, overdue_fines: 1, university_id: 5}
-])
-University.create!([
-  {name: "North Carolina State University", state: "North Carolina"},
-  {name: "University of North Carolina - Chapell Hill", state: "North Carolina"},
-  {name: "Duke University", state: "North Carolina"},
-  {name: "University of North Carolina - Charlotte", state: "North Carolina"},
-  {name: "Wake Forest University", state: "California"}
 ])
