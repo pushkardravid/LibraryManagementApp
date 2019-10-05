@@ -1,25 +1,17 @@
-# README
-
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
 # Mavericks - CSC 517 Program 2
+
+[Access App](https://mavericks-csc517.herokuapp.com)
+
+
+
+*Admin Credentials*
+
+- Email: admin@system.edu
+- Password: password
+
+### Few Guildlines:
+
+- Use 'Home' or 'Library Management App' link to nagivate back to dashboard page , in case you feel lost along the way.
+
+
+**Under development**
