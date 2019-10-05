@@ -16,7 +16,6 @@ class StudentsTest < ApplicationSystemTestCase
 
     fill_in "Educational level", with: @student.educational_level
     fill_in "Email", with: @student.email
-    fill_in "Max books blocking", with: @student.max_books_blocking
     fill_in "Name", with: @student.name
     fill_in "Password", with: @student.password
     fill_in "University", with: @student.university_id
@@ -32,7 +31,6 @@ class StudentsTest < ApplicationSystemTestCase
 
     fill_in "Educational level", with: @student.educational_level
     fill_in "Email", with: @student.email
-    fill_in "Max books blocking", with: @student.max_books_blocking
     fill_in "Name", with: @student.name
     fill_in "Password", with: @student.password
     fill_in "University", with: @student.university_id

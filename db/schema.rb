@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_28_235333) do
+ActiveRecord::Schema.define(version: 2019_10_05_051627) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -133,7 +133,6 @@ ActiveRecord::Schema.define(version: 2019_09_28_235333) do
     t.string "password"
     t.integer "educational_level"
     t.bigint "university_id", null: false
-    t.integer "max_books_blocking"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "encrypted_password", default: "", null: false

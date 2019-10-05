@@ -28,18 +28,13 @@
 
   <div class="field">
     <%= form.label :educational_level %>
-    <%= form.number_field :educational_level %>
+    <%= select("student", "educational_level", [["Undergraduate", "undergraduate"], ["Graduate", "graduate"],["PhD", "phd"]]) %>
+
   </div>
 
   <div class="field">
     <%= form.label :university %>
-    <%= select_tag "university", options_from_collection_for_select(University.all, "id", "name") %>
-  </div>
-
-
-  <div class="field">
-    <%= form.label :max_books_blocking %>
-    <%= form.number_field :max_books_blocking %>
+    <%= select("student", "university_id", University.all.collect{ |l| [ l.name, l.id] }) %>
   </div>
 
   <div class="actions">

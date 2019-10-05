@@ -35,13 +35,9 @@
   <%= f.radio_button :educational_level, 'graduate' %>
   <%= label :educational_level_pg, 'graduate' %>
 </div>
+w
 
-<div class="form-group">
-    <%= f.hidden_field :max_books_blocking, autofocus: true, autocomplete: "max_books_blocking" %>
-  </div>
-
-
-  <div">
+  <div>
     <%= f.submit "Sign up", class: 'btn btn-primary' %>
   </div>
 <% end %>
@@ -49,33 +45,6 @@
 <%= render "students/shared/links" %>
 
 
-<script type="text/javascript">
-  
-
-  var rad = document.getElementsByName('student[educational_level]');
-  var prev = null;
-  for (var i = 0; i < rad.length; i++) {
-      rad[i].addEventListener('change', function() {
-          if (this !== prev) {
-              prev = this;
-          }
-          education_level = this.value;
-          let max_books_blocking = 0;
-          if(education_level == 'undergraduate'){
-            max_books_blocking = 1;
-          }
-          else if(education_level == 'graduate'){
-            max_books_blocking = 2;
-          }
-          else if(education_level == 'phd'){
-            max_books_blocking = 3;
-          }
-          document.getElementById('student_max_books_blocking').value = max_books_blocking;
-      });
-}
-
-
-</script>
 
 
 </div>

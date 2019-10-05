@@ -10,7 +10,6 @@
       <th>Password</th>
       <th>Educational level</th>
       <th>University</th>
-      <th>Max books blocking</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -23,7 +22,6 @@
         <td><%= student.password %></td>
         <td><%= student.educational_level %></td>
         <td><%= student.university_id %></td>
-        <td><%= student.max_books_blocking %></td>
         <td><%= link_to 'Show', student %></td>
         <td><%= link_to 'Edit', edit_student_path(student) %></td>
         <td><%= link_to 'Destroy', student, method: :delete, data: { confirm: 'Are you sure?' } %></td>

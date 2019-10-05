@@ -6,7 +6,6 @@ one:
   password: MyString
   educational_level: 1
   university: one
-  max_books_blocking: 1
 
 two:
   email: MyString
@@ -14,4 +13,3 @@ two:
   password: MyString
   educational_level: 1
   university: two
-  max_books_blocking: 1
