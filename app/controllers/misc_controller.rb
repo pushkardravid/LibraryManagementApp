@@ -1,6 +1,6 @@
 class MiscController < ApplicationController
-	before_action :authenticate_admin!, except[:index], if: -> { :admin_signed_in?  }
-	before_action :test_user, except[:index], unless: -> { :admin_signed_in? }
+	before_action :authenticate_admin!, except: [:index], if: -> { :admin_signed_in?  }
+	before_action :test_user, except: [:index], unless: -> { :admin_signed_in? }
 
 	def index
 	end
