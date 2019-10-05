@@ -25,7 +25,7 @@
 
   <div class="form-group">
     <%= f.label :library_id %><br />
-    <%= f.text_field :library_id, autofocus: true, autocomplete: "library_id", class: 'form-control' %>
+    <%= select_tag "library_id", options_from_collection_for_select(Library.all, "id", "name"), autofocus: true, autocomplete: "library_id", class: 'form-control' %>
   </div>
   <div>
     <%= f.submit "Sign up", class: 'btn btn-primary' %>

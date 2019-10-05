@@ -1,5 +1,13 @@
 class Book < ApplicationRecord
+
+    has_many :book_library_mappings, dependent: :destroy    
+    has_many :book_author_mappings, dependent: :destroy
+    has_many :book_hold_requests, dependent: :destroy
+    has_many :borrowing_histories, dependent: :destroy
+    has_many :student_bookmarks, dependent: :destroy
+    has_many :book_library_mappings, dependent: :destroy
     
+
     def self.search(by, search)
         where('title LIKE ?', "%#{search}%")
     end

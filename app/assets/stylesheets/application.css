@@ -15,3 +15,7 @@
  */
 
  .hidden { display: none; }
+
+ .inline { display: inline; }
+
+ .float-right { float: right;}

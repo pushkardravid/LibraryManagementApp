@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   resources :books
   resources :librarians
 
-  get '/home/' => 'application#home'
+  get 'home/' => 'application#home'
   get 'admin_dashboard/' => 'admin_dashboard#index', :as => :admin_dashboard
   get 'approve_librarian/:id' => 'librarians#approve_librarian', :as => :approve_librarian
   get 'librarian_dashboard/' => 'librarian_dashboard#index', :as => :librarian_dashboard

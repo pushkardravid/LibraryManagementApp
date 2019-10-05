@@ -1,18 +1,17 @@
 <p id="notice"><%= notice %></p>
 
 <h2>Search Book</h2>
+<div class="inline">
 <div>
 <%= form_tag(books_url, :method => "get") do %>
   <%= select_tag "search_by", options_for_select([ "Title", "Author", "Subject", "Publication Date" ], "Title") %>
   <%= text_field_tag :search, nil, placeholder: "Search.." %>
   <%= submit_tag 'Search', name: nil %>
 <% end %>
-<% if current_admin%>
-<%= link_to 'New Book', new_book_path %>
-<% end%>
 </div>
 
-
+</div>
+<hr>
 <table>
   <thead>
     <tr>
@@ -78,3 +77,9 @@
 </table>
 
 <br>
+
+<div >
+<% if current_admin%>
+<%= button_to 'New Book', new_book_path %>
+<% end%>
+</div>
