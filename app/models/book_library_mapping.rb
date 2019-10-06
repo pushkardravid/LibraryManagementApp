@@ -3,7 +3,7 @@ class BookLibraryMapping < ApplicationRecord
   belongs_to :library
 
   def self.fetch_book_by_library(library_id)
-    self.where('library_id = ?', "%#{library_id}%").collect{ |u| u.book_id }
+    where('library_id = ?', "#{library_id}").collect{ |u| u.book_id }
   end
 
   def self.fetch_library_for_book(book_id)

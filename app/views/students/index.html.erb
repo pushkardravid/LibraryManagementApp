@@ -1,35 +1,20 @@
-<p id="notice"><%= notice %></p>
 
-<br/><h3>Students</h3><hr>
+<%= link_to "View all books", books_path %><br/>
+<%= link_to "View pending book requests", librarian_approval_path %><br/>
+<%= link_to "View all bookmarked books", view_bookmark_path %><br/>
+<%= link_to "View all libraries",libraries_path %><br/>
+<%= link_to "View all hold requests",student_hold_requests_path %><br/>
+<%= link_to "View all checked out books", view_checkouts_path %><br/>
 
-<table class=" table table-striped sortable">
-  <thead>
-    <tr>
-      <th>Email</th>
-      <th>Name</th>
-      <th>Password</th>
-      <th>Educational level</th>
-      <th>University</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
 
-  <tbody>
-    <% @students.each do |student| %>
-      <tr>
-        <td><%= student.email %></td>
-        <td><%= student.name %></td>
-        <td><%= student.password %></td>
-        <td><%= student.educational_level %></td>
-        <td><%= student.university_id %></td>
-        <td><%= link_to 'Show', student %></td>
-        <td><%= link_to 'Edit', edit_student_path(student) %></td>
-        <td><%= link_to 'Destroy', student, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+</br>
+</br>
+</br>
+<div> 
+<h4>Overdue fines: </h4>
+<%= %>
+<%= link_to "More Details", students_path %><br/>
 
-<br>
+</div>
 
-<%= link_to 'New Student', new_student_path %>
+

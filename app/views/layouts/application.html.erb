@@ -2,6 +2,7 @@
 <html>
   <head>
     <title>LibraryManagementApp</title>
+    <link rel="stylesheet" href="app/assets/stylesheets/w3.css">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
@@ -9,6 +10,7 @@
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    
 
 
   </head>
@@ -56,18 +58,24 @@
         </div>
       </li>
 <% end %>
-<li class="nav-item active" style="padding-left:100%">
-      <% if @current_user %>
-  <% if @current_user == 'student' %>
+<li class="nav-item active" >
+  
+      <%= link_to "Back", :back, class: 'nav-link'  %>
+      
+</li>
+<li class="nav-item active" >
+  
+  <% if @current_user %>
+    <% if @current_user == 'student' %>
       <%= link_to('Logout', destroy_student_session_path, method: :delete, class: 'nav-link') %>
-  <% end %>
-  <% if @current_user == 'librarian' %>
-      <%= link_to('Logout', destroy_librarian_session_path, method: :delete, class: 'nav-link') %>
-  <% end %>
-  <% if @current_user == 'admin' %>
+    <% end %>
+    <% if @current_user == 'librarian' %>
+        <%= link_to('Logout', destroy_librarian_session_path, method: :delete, class: 'nav-link') %>
+    <% end %>
+    <% if @current_user == 'admin' %>
       <%= link_to('Logout', destroy_admin_session_path, method: :delete, class: 'nav-link') %>
+    <% end %>
   <% end %>
-<% end %>
 </li>
 
     </ul>

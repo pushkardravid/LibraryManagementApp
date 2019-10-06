@@ -21,6 +21,12 @@ class BookHoldRequestsController < ApplicationController
   def edit
   end
 
+  def student_hold_requests
+    if current_student
+      @hold_requests =  BookHoldRequest.fetch_hold_requests_by_student(current_student.id)
+    end
+  end
+
   # POST /book_hold_requests
   # POST /book_hold_requests.json
   def create

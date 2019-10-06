@@ -12,4 +12,9 @@ class BookHoldRequest < ApplicationRecord
       false
     end
   end
+
+  def self.fetch_hold_requests_by_student(student_id)
+    where(:student_id => student_id)
+  end
+
 end

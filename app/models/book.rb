@@ -21,4 +21,8 @@ class Book < ApplicationRecord
         }
         books
     end
+
+    def self.fetch_books_by_ids(ids)         
+        ids.map {|id| Book.find(id)}
+    end
 end

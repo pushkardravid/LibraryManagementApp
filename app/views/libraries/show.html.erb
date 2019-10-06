@@ -20,5 +20,12 @@
   <%= @library.overdue_fines %>
 </p>
 
-<%= link_to 'Edit', edit_library_path(@library) %> |
-<%= link_to 'Back', libraries_path %>
+<% if current_admin %>
+<%= link_to 'Edit', edit_library_path(@library) %> 
+<%end%>
+
+<br><br><br>
+<h3>Books in <%= @library.name %></h3>
+<hr>
+<%= render "books/search"%>
+<%= render "books/list", :@books => Book.fetch_books_by_ids(BookLibraryMapping.fetch_book_by_library(@library.id))%>

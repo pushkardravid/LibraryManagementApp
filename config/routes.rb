@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   resources :students
   resources :libraries
   resources :books
-  resources :librarians
+  resources :librarians 
 
   get 'home/' => 'application#home'
   get 'admin_dashboard/' => 'misc#admin_dashboard', :as => :admin_dashboard
@@ -22,7 +22,10 @@ Rails.application.routes.draw do
   post 'request/:id' => 'books#request_book', :as => :request
   post 'return/:id' => 'books#return_book', :as => :return
   get 'bookmarks/:id' => 'books#bookmark_toggle', :as => :bookmark
-  get 'bookmarks/' => 'books#view_bookmarks', :as => :get_bookmark
+  get 'bookmarks/' => 'books#view_bookmarks', :as => :view_bookmark
+  get 'checkouts/' => 'books#view_checkouts', :as => :view_checkouts
+  
+  get 'student_hold_requests/' => 'book_hold_requests#student_hold_requests', :as => :student_hold_requests
   get 'book_hold_request_approve/:id' => 'book_hold_requests#approve', :as => :approve_book_hold_request
 
   get 'librarian_approval/' => 'misc#librarian_approval', :as => :librarian_approval

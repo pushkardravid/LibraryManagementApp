@@ -1,0 +1,10 @@
+<h5>Search Book</h5>
+<div class="inline">
+<div>
+<%= form_tag(books_url, :method => "get") do %>
+  <%= select_tag "search_by", options_for_select([ "Title", "Author", "Subject", "Publication Date" ], "Title") %>
+  <%= text_field_tag :search, nil, placeholder: "Search.." %>
+  <%= submit_tag 'Search', name: nil %>
+<% end %>
+</div>
+<hr>

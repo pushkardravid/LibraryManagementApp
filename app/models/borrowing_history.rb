@@ -18,4 +18,8 @@ class BorrowingHistory < ApplicationRecord
   def self.fetch_all_active_books_by_student(student_id)
     where('student_id = :student_id AND active = :active', student_id: "#{student_id}", active: "#{true}")
   end
+
+  def self.fetch_borrowed_books_by_student(student_id)
+    where('student_id = :student_id', student_id: "#{student_id}")
+  end
 end

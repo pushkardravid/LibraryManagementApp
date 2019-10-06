@@ -32,13 +32,22 @@ class BooksController < ApplicationController
 
   def view_bookmarks
     if current_student
-      student_id = current_student.id
-      @books_with_bookmarks = Book.where( id: StudentBookmark.where(:student_id => student_id).book_id)
-    else
-      @books_with_bookmarks = Book.where('id = ?', StudentBookmark.all.book_id)
+      student_bookmarks =  StudentBookmark.where(:student_id => current_student.id)
+      if not student_bookmarks.nil? or student_bookmarks.empty?
+        @books_with_bookmarks = Book.fetch_books_by_ids(student_bookmarks.map {|student_bookmark| student_bookmark.book_id })
+      end
     end
   end
 
+  
+  def view_checkouts
+    if current_student
+      borrowed_bookmarks =  BorrowingHistory.fetch_borrowed_books_by_student(current_student.id)
+      if not borrowed_bookmarks.nil? or borrowed_bookmarks.empty?
+        @borrowed_books = Book.fetch_books_by_ids(borrowed_bookmarks.map {|borrowed_bookmark| borrowed_bookmark.book_id })
+      end
+    end
+  end
 
 
   def bookmark_toggle
