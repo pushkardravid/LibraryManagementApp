@@ -1,10 +1,22 @@
 class LibrariesController < ApplicationController
   before_action :set_library, only: [:show, :edit, :update, :destroy]
+  before_action :test_user
+
+  def test_user
+		if not (admin_signed_in? or  librarian_signed_in?)
+			redirect_to('/')
+    end
+  end
 
   # GET /libraries
   # GET /libraries.json
   def index
-    @libraries = Library.all
+    if current_admin
+      @libraries = Library.all
+    elsif current_librarian
+      library_id = current_librarian.library_id
+      @libraries = Array.new.push(Library.find(library_id))
+    end
   end
 
   # GET /libraries/1

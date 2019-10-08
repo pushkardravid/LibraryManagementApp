@@ -3,10 +3,10 @@ class BooksController < ApplicationController
   before_action :set_book, only: [:show, :edit, :update, :destroy, :bookmark_toggle, :checkout_book, :request_book, :return_book]
   before_action :test_user
 
-	def test_user
-		if not (admin_signed_in? or student_signed_in?)
-			redirect_to('/students/sign_in')
-		end
+  def test_user
+		if not (admin_signed_in? or student_signed_in? or librarian_signed_in?)
+			redirect_to('/')
+    end
   end
   
   # GET /books
@@ -18,6 +18,9 @@ class BooksController < ApplicationController
       @books = Book.fetch_books_by_university(student_id)
     elsif current_admin
       @books = Book.all
+    elsif current_librarian
+      library_id = current_librarian.library_id
+      @books = Book.fetch_books_by_library(library_id)
     end
 
     if !params[:search].nil?

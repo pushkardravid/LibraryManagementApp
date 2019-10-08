@@ -61,27 +61,47 @@
 <li class="nav-item active" >
   
       <%= link_to "Back", :back, class: 'nav-link'  %>
-      
-</li>
-<li class="nav-item active" >
-  
-  <% if @current_user %>
-    <% if @current_user == 'student' %>
-      <%= link_to('Logout', destroy_student_session_path, method: :delete, class: 'nav-link') %>
-    <% end %>
-    <% if @current_user == 'librarian' %>
-        <%= link_to('Logout', destroy_librarian_session_path, method: :delete, class: 'nav-link') %>
-    <% end %>
-    <% if @current_user == 'admin' %>
-      <%= link_to('Logout', destroy_admin_session_path, method: :delete, class: 'nav-link') %>
-    <% end %>
-  <% end %>
-</li>
-
     </ul>
+
+
+    <ul class="navbar-nav ml-auto"  style="padding-right:5%">
+            <li class="nav-item">
+                
+<% if @current_user %>
+<li class="nav-item dropdown" >
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Settings
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+        <% if @current_user %>
+        <% if @current_user == 'student' %>
+        <%= link_to "Edit Profile", edit_student_path(current_student), class: 'dropdown-item' %>
+        <% end %>
+        <% if @current_user == 'librarian' %>   
+          <%= link_to "Edit Profile", edit_librarian_path(current_librarian), class: 'dropdown-item' %>
+        <% end %>
+      <% end %>
+          
+          <div class="dropdown-divider"></div>
+          <% if @current_user == 'student' %>
+          <%= link_to('Logout', destroy_student_session_path, method: :delete, class: 'dropdown-item') %>
+        <% end %>
+        <% if @current_user == 'librarian' %>
+            <%= link_to('Logout', destroy_librarian_session_path, method: :delete, class: 'dropdown-item') %>
+        <% end %>
+        <% if @current_user == 'admin' %>
+          <%= link_to('Logout', destroy_admin_session_path, method: :delete, class: 'dropdown-item') %>
+        <% end %>
+        </div>
+      </li>
+    <% end %>
+            </li>
+        </ul>
  
   </div>
 </nav>
+
+
     <%= yield %>
 
 

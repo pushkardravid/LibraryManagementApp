@@ -101,6 +101,7 @@ ActiveRecord::Schema.define(version: 2019_10_05_051627) do
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
+    t.boolean "isactive"
     t.boolean "approved"
     t.index ["email"], name: "index_librarians_on_email", unique: true
     t.index ["library_id"], name: "index_librarians_on_library_id"

@@ -24,7 +24,10 @@ class BookHoldRequestsController < ApplicationController
   def student_hold_requests
     if current_student
       @hold_requests =  BookHoldRequest.fetch_hold_requests_by_student(current_student.id)
+    else
+      @hold_requests = Array.new
     end
+    @hold_requests
   end
 
   # POST /book_hold_requests

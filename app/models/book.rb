@@ -25,4 +25,12 @@ class Book < ApplicationRecord
     def self.fetch_books_by_ids(ids)         
         ids.map {|id| Book.find(id)}
     end
+
+    def self.fetch_books_by_library(library_id)         
+        books = Array.new
+        BookLibraryMapping.where('library_id = ?', library_id).each { |book_library|
+              books.push(Book.find(book_library.book_id))
+            }
+        books
+    end
 end

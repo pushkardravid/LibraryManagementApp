@@ -20,8 +20,10 @@
         <td><%= library.max_days_blocking %></td>
         <td><%= library.overdue_fines %></td>
         <td><%= link_to 'Show', library %></td>
-        <% if current_admin %>
+        <% if current_admin or current_librarian %>
         <td><%= link_to 'Edit', edit_library_path(library) %></td>
+        <% end %>
+        <% if current_admin %>
         <td><%= link_to 'Destroy', library, method: :delete, data: { confirm: 'Are you sure?' } %></td>
         <% end %>
       </tr>

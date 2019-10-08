@@ -1,7 +1,7 @@
 class MiscController < ApplicationController
-	before_action :authenticate_admin!, except: [:index], if: -> { :admin_signed_in?  }
-	before_action :authenticate_student!, except: [:index], if: -> { :student_signed_in? }
-	before_action :authenticate_librarian!, except: [:index], if: -> { :librarian_signed_in?  }
+	#before_action :authenticate_admin!, except: [:admin_dashboard], if: -> { :admin_signed_in?  }
+	#before_action :authenticate_student!, except: [:index], if: -> { :student_signed_in? }
+	#before_action :authenticate_librarian!, except: [:librarian_dashboard], if: -> { :librarian_signed_in?}
 
 
 	def index
@@ -12,6 +12,9 @@ class MiscController < ApplicationController
 	end
 
 	def admin_dashboard
+	end
+
+	def librarian_dashboard
 	end
 
 end

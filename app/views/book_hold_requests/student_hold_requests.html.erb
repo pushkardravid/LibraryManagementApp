@@ -20,7 +20,7 @@
   </thead>
 
   <tbody>
-    <% @hold_requests.each do |hold_request| %>
+    <% @book_hold_requests.each do |hold_request| %>
         <% book = Book.find(hold_request.book_id) %>
         <% library = Library.find(hold_request.library_id) %>
       <tr>
