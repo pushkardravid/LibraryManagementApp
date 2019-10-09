@@ -4,6 +4,7 @@ class BookHoldRequest < ApplicationRecord
   belongs_to :library
 
   enum reason: [:special, :unavailable, :max_reached]
+  validates :reason, presence: true, numericality: { greater_than_or_equal_to: 0 }
 
   def self.is_requested?(student_id, book_id)
     if BookHoldRequest.where(:student_id => student_id, :book_id => book_id).length != 0

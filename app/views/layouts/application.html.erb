@@ -1,125 +1,122 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>LibraryManagementApp</title>
-    <link rel="stylesheet" href="app/assets/stylesheets/w3.css">
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
-
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
-
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    
-
-
-  </head>
-
-  <body>
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <a class="navbar-brand" href="/home/">Library Management App</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="nav-link" href="/home/">Home <span class="sr-only">(current)</span></a>
-      </li>
-      
-      <% if !admin_signed_in? and !librarian_signed_in? and !student_signed_in? %>
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownStudent" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Student
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdownStudent">
-          <a class="dropdown-item" href="/students/sign_in">Sign-in</a>
-          <a class="dropdown-item" href="/students/sign_up">Sign-up</a>
-        </div>
-      </li>
-
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownAdmin" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Admin
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdownAdmin">
-          <a class="dropdown-item" href="/admins/sign_in">Sign-in</a>
-        </div>
-      </li>
-
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownLibrarian" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Librarian
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdownLibrarian">
-          <a class="dropdown-item" href="/librarians/sign_in">Sign-in</a>
-          <a class="dropdown-item" href="/librarians/sign_up">Sign-up</a>
-        </div>
-      </li>
-<% end %>
-<li class="nav-item active" >
-  
-      <%= link_to "Back", :back, class: 'nav-link'  %>
-    </ul>
-
-
-    <ul class="navbar-nav ml-auto"  style="padding-right:5%">
-            <li class="nav-item">
-                
-<% if @current_user %>
-<li class="nav-item dropdown" >
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Settings
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-        <% if @current_user %>
-        <% if @current_user == 'student' %>
-        <%= link_to "Edit Profile", edit_student_path(current_student), class: 'dropdown-item' %>
-        <% end %>
-        <% if @current_user == 'librarian' %>   
-          <%= link_to "Edit Profile", edit_librarian_path(current_librarian), class: 'dropdown-item' %>
-        <% end %>
-      <% end %>
-          
-          <div class="dropdown-divider"></div>
-          <% if @current_user == 'student' %>
-          <%= link_to('Logout', destroy_student_session_path, method: :delete, class: 'dropdown-item') %>
-        <% end %>
-        <% if @current_user == 'librarian' %>
-            <%= link_to('Logout', destroy_librarian_session_path, method: :delete, class: 'dropdown-item') %>
-        <% end %>
-        <% if @current_user == 'admin' %>
-          <%= link_to('Logout', destroy_admin_session_path, method: :delete, class: 'dropdown-item') %>
-        <% end %>
-        </div>
-      </li>
-    <% end %>
-            </li>
-        </ul>
- 
-  </div>
-</nav>
-
-
-    <%= yield %>
-
-
-
-<div id="footer" style="bottom: 0;
-    width: 100%;
-    position: absolute;">
-    <div class="container">
-      <!-- <p class="footer-block">Made with <span class="glyphicon glyphicon-list-alt"></span>
-by KRK gang</p> -->
-    </div>
-  </div>
-
-
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-
-
-  </body>
+   <head>
+      <title>LibraryManagementApp</title>
+      <link rel="stylesheet" href="app/assets/stylesheets/w3.css">
+      <%= csrf_meta_tags %>
+      <%= csp_meta_tag %>
+      <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+      <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+   </head>
+   <body>
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+         <a class="navbar-brand" href="/home/">Library Management App</a>
+         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+         <span class="navbar-toggler-icon"></span>
+         </button>
+         <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+               <li class="nav-item active">
+                  <a class="nav-link" href="/home/">Home <span class="sr-only">(current)</span></a>
+               </li>
+               <% if !admin_signed_in? and !librarian_signed_in? and !student_signed_in? %>
+               <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownStudent" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Student
+                  </a>
+                  <div class="dropdown-menu" aria-labelledby="navbarDropdownStudent">
+                     <a class="dropdown-item" href="/students/sign_in">Sign-in</a>
+                     <a class="dropdown-item" href="/students/sign_up">Sign-up</a>
+                  </div>
+               </li>
+               <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownAdmin" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Admin
+                  </a>
+                  <div class="dropdown-menu" aria-labelledby="navbarDropdownAdmin">
+                     <a class="dropdown-item" href="/admins/sign_in">Sign-in</a>
+                  </div>
+               </li>
+               <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownLibrarian" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Librarian
+                  </a>
+                  <div class="dropdown-menu" aria-labelledby="navbarDropdownLibrarian">
+                     <a class="dropdown-item" href="/librarians/sign_in">Sign-in</a>
+                     <a class="dropdown-item" href="/librarians/sign_up">Sign-up</a>
+                  </div>
+               </li>
+               <% end %>
+               <li class="nav-item active" >
+                  <% if%>
+                  <%= link_to "Back", :back, class: 'nav-link'  %>
+                  <% end %>
+               </li>
+            </ul>
+            <ul class="navbar-nav ml-auto"  style="padding-right:5%">
+               <% if @current_user %>
+               <li class="nav-item active" >
+                  <% if @current_user == 'student'  %>
+                    <% username = current_student.name %>
+                  <% elsif @current_user == 'librarian'  %>
+                    <% username = current_librarian.name %>
+                  <% elsif @current_user == 'admin'  %>
+                    <% username = current_admin.name %>
+                  <% else  %>
+                    <% username = "User" %>
+                  <% end %>
+                  <span>Welcome <%= username %>...</span>
+               </li>
+               <li class="nav-item">
+               <li class="nav-item dropdown" >
+                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Settings
+                  </a>
+                  <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                     <% if @current_user %>
+                     <% if @current_user == 'student' %>
+                     <%= link_to "Edit Profile", edit_student_path(current_student), class: 'dropdown-item' %>
+                     <% end %>
+                     <% if @current_user == 'librarian' %>   
+                     <%= link_to "Edit Profile", edit_librarian_path(current_librarian), class: 'dropdown-item' %>
+                     <% end %>
+                     <% end %>
+                     <div class="dropdown-divider"></div>
+                     <% if @current_user == 'student' %>
+                     <%= link_to('Logout', destroy_student_session_path, method: :delete, class: 'dropdown-item') %>
+                     <% end %>
+                     <% if @current_user == 'librarian' %>
+                     <%= link_to('Logout', destroy_librarian_session_path, method: :delete, class: 'dropdown-item') %>
+                     <% end %>
+                     <% if @current_user == 'admin' %>
+                     <%= link_to('Logout', destroy_admin_session_path, method: :delete, class: 'dropdown-item') %>
+                     <% end %>
+                  </div>
+               </li>
+               <% end %>
+               </li>
+            </ul>
+         </div>
+      </nav>
+      <% if current_page?(root_url)%>
+      <% padding = "" %>
+      <% else%> 
+      <% padding = 'padding-1' %>
+      <%end%>
+      <div class= <%= padding %> >
+         <%= yield %> 
+      </div>
+      <div id="footer" style="bottom: 0;
+         width: 100%;
+         position: absolute;">
+         <div class="container">
+            <!-- <p class="footer-block">Made with <span class="glyphicon glyphicon-list-alt"></span>
+               by KRK gang</p> -->
+         </div>
+      </div>
+      <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+   </body>
 </html>

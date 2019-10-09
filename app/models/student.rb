@@ -8,7 +8,11 @@ class Student < ApplicationRecord
   
   has_many :student_bookmarks, dependent: :destroy    
   has_many :borrowing_histories, dependent: :destroy    
-  has_many :book_hold_requests, dependent: :destroy    
+  has_many :book_hold_requests, dependent: :destroy   
+   
+  validates :email, presence: true, uniqueness: true
+  validates :name, presence: true
+  validates :password, presence: true
 
 
   def self.calculate_overdue_fine(student_id) 
@@ -21,7 +25,7 @@ class Student < ApplicationRecord
       if not library_id.nil?
         library = Library.find(library_id)
         max_days_blocking = library.max_days_blocking 
-        overdue_fine += ((Date.today - checkout_book.issue_date).abs + 1) * ibrary.overdue_fines
+        overdue_fine += ((Date.today - checkout_book.issue_date).abs + 1) * library.overdue_fines
       end
     }
 

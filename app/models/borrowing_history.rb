@@ -1,6 +1,8 @@
 class BorrowingHistory < ApplicationRecord
   belongs_to :student
   belongs_to :book
+  validates :issue_date, presence: true
+  validates :active, presence: true
 
   def self.is_book_active?(student_id, book_id)
     book = where('student_id = :student_id AND book_id = :book_id', student_id: "#{student_id}", book_id: "#{book_id}").first
@@ -22,4 +24,17 @@ class BorrowingHistory < ApplicationRecord
   def self.fetch_borrowed_books_by_student(student_id)
     where('student_id = :student_id', student_id: "#{student_id}")
   end
+
+  def self.fetch_all_active_books_in_library(librarian_library_id)
+    where('active = :active', active: "#{true}").select { |bh|  
+      librarian_library_id == BookLibraryMapping.fetch_library_for_book(bh.book_id) 
+    }
+  end
+
+  def self.fetch_all_books_in_library(librarian_library_id)
+    BorrowingHistory.all.select { |bh|  
+      librarian_library_id == BookLibraryMapping.fetch_library_for_book(bh.book_id) 
+    }
+  end
+
 end

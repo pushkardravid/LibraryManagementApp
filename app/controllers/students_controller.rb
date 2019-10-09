@@ -62,6 +62,10 @@ class StudentsController < ApplicationController
     end
   end
 
+  def fine_details
+    @active_books = BorrowingHistory.fetch_all_active_books_by_student(current_student.id)
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_student

@@ -1,6 +1,8 @@
 class BookLibraryMapping < ApplicationRecord
   belongs_to :book
   belongs_to :library
+  validates :quantity, presence: true, numericality: { greater_than_or_equal_to: 0 }
+
 
   def self.fetch_book_by_library(library_id)
     where('library_id = ?', "#{library_id}").collect{ |u| u.book_id }

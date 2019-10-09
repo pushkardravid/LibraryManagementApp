@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
 		if admin_signed_in?
 			redirect_to '/admin_dashboard'
 		elsif librarian_signed_in?
-			redirect_to librarians_path
+			redirect_to '/librarian_dashboard'
 		elsif student_signed_in?
 			redirect_to students_path
 		else

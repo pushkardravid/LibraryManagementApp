@@ -43,15 +43,14 @@ class BooksController < ApplicationController
   end
 
   
-  def view_checkouts
+  def view_student_checkouts
     if current_student
-      borrowed_bookmarks =  BorrowingHistory.fetch_borrowed_books_by_student(current_student.id)
+      borrowed_bookmarks =  BorrowingHistory.fetch_all_active_books_by_student(current_student.id)
       if not borrowed_bookmarks.nil? or borrowed_bookmarks.empty?
         @borrowed_books = Book.fetch_books_by_ids(borrowed_bookmarks.map {|borrowed_bookmark| borrowed_bookmark.book_id })
       end
     end
   end
-
 
   def bookmark_toggle
     student_id = current_student.id 

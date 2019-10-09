@@ -1,4 +1,7 @@
-<br/><h3>Book Hold Requests</h3><hr>
+<h3>Book Hold Requests</h3>
+
+<%= render "books/search"%>
+
 
 <div>
 <% if @hold_requests.empty? or @hold_requests.nil? %>
@@ -20,7 +23,7 @@
   </thead>
 
   <tbody>
-    <% @book_hold_requests.each do |hold_request| %>
+    <% @hold_requests.each do |hold_request| %>
         <% book = Book.find(hold_request.book_id) %>
         <% library = Library.find(hold_request.library_id) %>
       <tr>

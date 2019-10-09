@@ -1,32 +1,33 @@
-<% if @books.length == 0 or @books.nil? %>
-    <br><p> No books found :( </p>
-  <% else %>
-<table class="w3-table-all">
+<h3>Books Incurring fines:</h3>
+
+<div>
+
+<table class="w3-table">
   <thead>
     <tr>
       <th>Isbn</th>
       <th>Title</th>
-      <th>Language</th>
-      <th>Published</th>
-      <th>Edition</th>
-      <th>Subject</th>
+      <th>Issued Date</th>
       <th>Summary</th>
       <th>Special</th>
+      <th>Library</th>
+      <th>Location</th>
       <th colspan="3"></th>
     </tr>
   </thead>
 
   <tbody>
-    <% @books.each do |book| %>
+    <% @active_books.each do |active_book| %>
+        <% book = Book.find(active_book.book_id) %>
+        <% library = Library.find(BookLibraryMapping.fetch_library_for_book(active_book.book_id)) %>
       <tr>
         <td><%= book.isbn %></td>
         <td><%= book.title %></td>
-        <td><%= book.language %></td>
-        <td><%= book.published %></td>
-        <td><%= book.edition %></td>
-        <td><%= book.subject %></td>
+        <td><%= active_book.issue_date %></td>
         <td><%= book.summary %></td>
         <td><%= book.special %></td>
+        <td><%= library.name %></td>
+        <td><%= library.location %></td>
         <td><%= link_to 'Details', book %></td>
         <% if current_admin or current_librarian%>
         <td><%= link_to 'Edit', edit_book_path(book) %></td>
@@ -55,7 +56,7 @@
         <% end %>
         <% end %>
         
-        <% if current_admin or current_librarian %>        
+        <% if current_admin%>        
         <td><%= link_to 'Destroy', book, method: :delete, data: { confirm: 'Are you sure?' } %></td>
         <% end %>
       </tr>
@@ -69,5 +70,4 @@
 <% if current_admin%>
 <%= button_to 'New Book', new_book_path %>
 <% end%>
-<% end %>
 </div>
