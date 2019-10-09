@@ -25,10 +25,12 @@
   <%= @book.edition %>
 </p>
 
-<p>
-  <strong>Image:</strong>
-  <%= @book.image %>
-</p>
+<%= form_for @book, html: { multipart: true } do |f| %>
+  <p>
+    <label>Cover Image</label>
+    <%= image_tag @book.image.url if @book.image? %>
+  </p>
+<% end %>
 
 <p>
   <strong>Subject:</strong>
@@ -46,4 +48,3 @@
 </p>
 
 <%= link_to 'Edit', edit_book_path(@book) %> |
-<%= link_to 'Back', books_path %>

@@ -9,7 +9,6 @@
       <th>Language</th>
       <th>Published</th>
       <th>Edition</th>
-      <th class="hidden">Image</th>
       <th>Subject</th>
       <th>Summary</th>
       <th>Special</th>
@@ -25,7 +24,6 @@
         <td><%= book.language %></td>
         <td><%= book.published %></td>
         <td><%= book.edition %></td>
-        <td class="hidden"><%= book.image %></td>
         <td><%= book.subject %></td>
         <td><%= book.summary %></td>
         <td><%= book.special %></td>
@@ -68,8 +66,9 @@
 <br>
 
 <div >
-<% if current_admin%>
-<%= button_to 'New Book', new_book_path %>
+<% if current_admin or current_librarian%>
+<%= button_to 'New Book', new_book_path, method: :get %>
+
 <% end%>
 <% end %>
 </div>

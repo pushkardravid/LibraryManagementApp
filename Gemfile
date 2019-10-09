@@ -58,3 +58,4 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'devise'
 gem 'seed_dump'
 gem 'omniauth-facebook'
+gem 'carrierwave', '~> 2.0'

@@ -1,20 +1,32 @@
+<% if current_student %>
+<p id="notice"><%= notice %></p>
 
 <%= link_to "View all books", books_path %><br/>
-<%= link_to "View pending book requests", librarian_approval_path %><br/>
 <%= link_to "View all bookmarked books", view_bookmark_path %><br/>
 <%= link_to "View all libraries",libraries_path %><br/>
 <%= link_to "View all hold requests",student_hold_requests_path %><br/>
-<%= link_to "View all checked out books", view_checkouts_path %><br/>
+<%= link_to "View all checked out books", view_student_checkouts_path %><br/>
 
 
 </br>
 </br>
 </br>
+
 <div> 
-<h4>Overdue fines: </h4>
-<%= %>
-<%= link_to "More Details", students_path %><br/>
 
+
+<h5>Overdue fines: </h5>
+<% fine =  Student.calculate_overdue_fine(current_student.id) %>
+<%= fine %>
+<% if fine != 0 %>
+<%= link_to "More Details", fine_details_path %><br/>
+<% else %>
+<% end %>
 </div>
+
+
+<% else %>
+    <span> Login as Student to view this page... </span>
+<% end %>
 
 

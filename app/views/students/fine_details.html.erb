@@ -1,19 +1,13 @@
-<h3>Book Hold Requests</h3>
-
-<%= render "books/search"%>
-
+<h3>Books Incurring fines:</h3>
 
 <div>
-<% if @hold_requests.empty? or @hold_requests.nil? %>
-    <br><p> No hold requests found :( </p>
-  <% else %>
+
 <table class="w3-table">
   <thead>
     <tr>
       <th>Isbn</th>
       <th>Title</th>
-      <th>Language</th>
-      <th>Published</th>
+      <th>Issued Date</th>
       <th>Summary</th>
       <th>Special</th>
       <th>Library</th>
@@ -23,14 +17,13 @@
   </thead>
 
   <tbody>
-    <% @hold_requests.each do |hold_request| %>
-        <% book = Book.find(hold_request.book_id) %>
-        <% library = Library.find(hold_request.library_id) %>
+    <% @active_books.each do |active_book| %>
+        <% book = Book.find(active_book.book_id) %>
+        <% library = Library.find(BookLibraryMapping.fetch_library_for_book(active_book.book_id)) %>
       <tr>
         <td><%= book.isbn %></td>
         <td><%= book.title %></td>
-        <td><%= book.language %></td>
-        <td><%= book.published %></td>
+        <td><%= active_book.issue_date %></td>
         <td><%= book.summary %></td>
         <td><%= book.special %></td>
         <td><%= library.name %></td>
@@ -77,5 +70,4 @@
 <% if current_admin%>
 <%= button_to 'New Book', new_book_path %>
 <% end%>
-<% end %>
 </div>

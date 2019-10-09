@@ -10,7 +10,7 @@ class BorrowingHistoriesController < ApplicationController
   # GET /borrowing_histories/1
   # GET /borrowing_histories/1.json
   def show
-  end
+  end 
 
   # GET /borrowing_histories/new
   def new
@@ -19,6 +19,21 @@ class BorrowingHistoriesController < ApplicationController
 
   # GET /borrowing_histories/1/edit
   def edit
+  end
+
+  def view_library_borrowing_history   
+    if current_librarian
+      @borrowing_histories = BorrowingHistory.fetch_all_books_in_library(current_librarian.library_id)
+    end
+    render :index
+  end
+
+  def view_library_checkouts
+    @borrowing_histories = Array.new
+    if current_librarian
+      @borrowing_histories = BorrowingHistory.fetch_all_active_books_in_library(current_librarian.library_id)
+    end
+    render :index
   end
 
   # POST /borrowing_histories

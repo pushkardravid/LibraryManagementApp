@@ -1,4 +1,6 @@
 class Book < ApplicationRecord
+    require 'carrierwave/orm/activerecord'
+    mount_uploader :image, AvatarUploader
 
     has_many :book_library_mappings, dependent: :destroy    
     has_many :book_author_mappings, dependent: :destroy
@@ -7,9 +9,22 @@ class Book < ApplicationRecord
     has_many :student_bookmarks, dependent: :destroy
     has_many :book_library_mappings, dependent: :destroy
     
+    validates :isbn, presence: true, uniqueness: true
+    validates :title, presence: true
+    
 
     def self.search(by, search)
-        where('title LIKE ?', "%#{search}%")
+        if by.downcase == "title"
+            where('title LIKE ?', "%#{search}%")
+        elsif by.downcase == "author"
+            where('author LIKE ?', "%#{search}%")
+        elsif by.downcase == "subject"
+            where('subject LIKE ?', "%#{search}%")
+        elsif by.downcase == "publication year"
+            where('published LIKE ?', "%#{search}%")
+        else
+            Book.all
+        end
     end
 
     def self.fetch_books_by_university(student_id)
