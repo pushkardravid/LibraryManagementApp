@@ -29,4 +29,7 @@ Rails.application.routes.draw do
   get 'book_hold_request_approve/:id' => 'book_hold_requests#approve', :as => :approve_book_hold_request
 
   get 'librarian_approval/' => 'misc#librarian_approval', :as => :librarian_approval
+
+  get 'libraries_overdue/:id' => 'libraries#overdue_books', :as => :libraries_overdue
+
 end

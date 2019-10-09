@@ -22,4 +22,8 @@ class BorrowingHistory < ApplicationRecord
   def self.fetch_borrowed_books_by_student(student_id)
     where('student_id = :student_id', student_id: "#{student_id}")
   end
+
+  def self.fetch_borrowed_books_by_library(library_id)
+    where('library_id = :library_id', library_id: "#{library_id}")
+  end
 end
