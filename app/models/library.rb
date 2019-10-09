@@ -8,4 +8,18 @@ class Library < ApplicationRecord
     validates :max_days_blocking, presence: true
     validates :overdue_fines, presence: true    
     
+    def self.get_overdue_books(library_id)
+        overdue_books = Array.new
+        checkout_books = BorrowingHistory.all.select { |bh|
+            library_id == BookLibraryMapping.fetch_library_for_book(bh.book_id)
+        }
+
+        checkout_books.map { |checkout_book|
+            if(checkout_book.issue_date < Date.today)
+                overdue_books.push(checkout_book)
+            end
+        }
+        overdue_books
+      end
+
 end

@@ -73,6 +73,12 @@ class LibrariesController < ApplicationController
     end
   end
 
+  def overdue_books
+    @library = Library.find(current_librarian.library_id)
+    @overdue_books = Library.get_overdue_books(@library.id)
+    @overdue_books
+  end
+  
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_library

@@ -34,10 +34,12 @@
         <div class="card-body">
           <h5 class="card-title">Student operations</h5>
           <p class="card-text">You can view all the books that belong to your library and can edit/delete them</p>
-          <a href="#" class="btn btn-primary">Manage Hold Requests</a>
+          
+          <%= link_to "Manage Hold Requests", :student_hold_requests, class: "btn btn-primary" %>
+
           <br>
           <br>
-          <a href="#" class="btn btn-primary">Manage Overdue</a>
+          <%= link_to "Manage Overdue", libraries_overdue_path(current_librarian.id), class: "btn btn-primary" %>
         </div>
       </div>
         </div>

@@ -33,4 +33,6 @@ Rails.application.routes.draw do
   get 'library_checkouts/' => 'borrowing_histories#view_library_checkouts', :as => :view_library_checkouts
   get 'library_borrowing_histories/' => 'borrowing_histories#view_library_borrowing_history', :as => :view_library_borrowing_history
 
+  get 'libraries_overdue/:id' => 'libraries#overdue_books', :as => :libraries_overdue
+
 end
