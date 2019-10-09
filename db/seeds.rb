@@ -18,14 +18,14 @@ Library.create!([
   {name: "ZSR Library", location: "Wake County", max_days_blocking: 20, overdue_fines: 1, university_id: 5}
 ])
 Book.create!([
-  {isbn: "1230456789", title: "DAA Cormen", language: "English", published: "2003", edition: "3", image: "", subject: "Computer Science, Discrete Mathematics, Computer Engineering", summary: "Introduction to Design and Analysis of Algorithms", special: false},
-  {isbn: "9876543210", title: "OS Fundamentals", language: "English", published: "2006", edition: "4", image: "", subject: "Computer Science, Computer Engineering ", summary: "", special: false},
-  {isbn: "9876541230", title: "Head First JAVA", language: "English", published: "2009", edition: "2", image: "", subject: "Computer Science, Information Technology and Science", summary: "Java Language Constructs", special: false},
-  {isbn: "7896541230", title: "Head First Design Patterns", language: "English", published: "2007", edition: "4", image: "", subject: "Computer Science", summary: "Bible for Design Patterns", special: true},
-  {isbn: "9638527410", title: "Engineering Software as a Service", language: "English", published: "2005", edition: "4", image: "", subject: "Computer Science, Informatio Technology", summary: "Armando Fox written introductory book for Engineering Softwares", special: false},
-  {isbn: "3698521470", title: "Cloud Infrastructures and Networks", language: "English", published: "2011", edition: "2", image: "", subject: "Computer Science, Computer Networks", summary: "Comprehensive text for cloud data center networks", special: false},
-  {isbn: "7415829630", title: "Distributed Algoritms", language: "English", published: "2001", edition: "2", image: "", subject: "Computer Science", summary: "Nancy Lynch written text for distributed algorithms", special: true},
-  {isbn: "2582582580", title: "Agile Methodologies", language: "English", published: "2009", edition: "4", image: "", subject: "Product Management, Computer Softwares", summary: "Agile practices and methodologies", special: true}
+  {isbn: "1230456789", title: "Design and Analysis of Algorithms", author: "Cormen", language: "English", published: "2003", edition: "3", image: "", subject: "Computer Science, Discrete Mathematics, Computer Engineering", summary: "Introduction to Design and Analysis of Algorithms", special: false},
+  {isbn: "9876543210", title: "OS Fundamentals", language: "English", author: "Steven", published: "2006", edition: "4", image: "", subject: "Computer Science, Computer Engineering ", summary: "", special: false},
+  {isbn: "9876541230", title: "Head First JAVA", language: "English", author: "Robert", published: "2009", edition: "2", image: "", subject: "Computer Science, Information Technology and Science", summary: "Java Language Constructs", special: false},
+  {isbn: "7896541230", title: "Head First Design Patterns", language: "English", author: "John", published: "2007", edition: "4", image: "", subject: "Computer Science", summary: "Bible for Design Patterns", special: true},
+  {isbn: "9638527410", title: "Engineering Software as a Service", language: "English", author: "GilFoyle", published: "2005", edition: "4", image: "", subject: "Computer Science, Informatio Technology", summary: "Armando Fox written introductory book for Engineering Softwares", special: false},
+  {isbn: "3698521470", title: "Cloud Infrastructures and Networks", language: "English", author: "Eric", published: "2011", edition: "2", image: "", subject: "Computer Science, Computer Networks", summary: "Comprehensive text for cloud data center networks", special: false},
+  {isbn: "7415829630", title: "Distributed Algoritms", language: "English", author: "Richard", published: "2001", edition: "2", image: "", subject: "Computer Science", summary: "Nancy Lynch written text for distributed algorithms", special: true},
+  {isbn: "2582582580", title: "Agile Methodologies", language: "English",author: "Mike", published: "2009", edition: "4", image: "", subject: "Product Management, Computer Softwares", summary: "Agile practices and methodologies", special: true}
 ])
 BookLibraryMapping.create!([
   {book_id: 1, library_id: 1, quantity: 10},
