@@ -3,7 +3,7 @@ Rails.application.routes.draw do
 
   devise_for :librarians, controllers: { sessions: 'librarian/sessions', registrations: 'librarian/registrations' }
   devise_for :admins, controllers: { sessions: 'admin/sessions', registrations: 'admin/registrations' }
-  devise_for :students, controllers: { sessions: 'student/sessions', registrations: 'student/registrations' }
+  devise_for :students, controllers: { omniauth_callbacks: 'student/omniauth_callbacks', sessions: 'student/sessions', registrations: 'student/registrations' }
 
   resources :borrowing_histories
   resources :book_hold_requests
