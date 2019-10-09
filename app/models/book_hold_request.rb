@@ -18,4 +18,9 @@ class BookHoldRequest < ApplicationRecord
     where(:student_id => student_id)
   end
 
+
+  def self.fetch_hold_requests_by_book(book_id)
+    where(:book_id => book_id).order('created_at')
+  end
+
 end

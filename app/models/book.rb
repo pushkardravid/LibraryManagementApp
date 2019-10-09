@@ -1,4 +1,6 @@
 class Book < ApplicationRecord
+    require 'carrierwave/orm/activerecord'
+    mount_uploader :image, AvatarUploader
 
     has_many :book_library_mappings, dependent: :destroy    
     has_many :book_author_mappings, dependent: :destroy
@@ -9,8 +11,7 @@ class Book < ApplicationRecord
     
     validates :isbn, presence: true, uniqueness: true
     validates :title, presence: true
-    validates :special, presence: true
-
+    
 
     def self.search(by, search)
         if by.downcase == "title"

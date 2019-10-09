@@ -10,11 +10,6 @@ class Student < ApplicationRecord
   has_many :borrowing_histories, dependent: :destroy    
   has_many :book_hold_requests, dependent: :destroy   
    
-  validates :email, presence: true, uniqueness: true
-  validates :name, presence: true
-  validates :password, presence: true
-
-
   def self.calculate_overdue_fine(student_id) 
     overdue_fine = 0 
     checkout_books = BorrowingHistory.fetch_all_active_books_by_student(student_id)

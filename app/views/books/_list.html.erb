@@ -66,8 +66,9 @@
 <br>
 
 <div >
-<% if current_admin%>
-<%= button_to 'New Book', new_book_path %>
+<% if current_admin or current_librarian%>
+<%= button_to 'New Book', new_book_path, method: :get %>
+
 <% end%>
 <% end %>
 </div>

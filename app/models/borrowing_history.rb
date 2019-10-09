@@ -1,6 +1,7 @@
 class BorrowingHistory < ApplicationRecord
   belongs_to :student
   belongs_to :book
+  
   validates :issue_date, presence: true
   validates :active, presence: true
 

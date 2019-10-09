@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_05_051627) do
+ActiveRecord::Schema.define(version: 2019_10_09_050237) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -71,7 +71,7 @@ ActiveRecord::Schema.define(version: 2019_10_05_051627) do
     t.string "language"
     t.string "published"
     t.string "edition"
-    t.text "image"
+    t.string "image"
     t.text "subject"
     t.text "summary"
     t.boolean "special"
@@ -101,7 +101,6 @@ ActiveRecord::Schema.define(version: 2019_10_05_051627) do
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.boolean "isactive"
     t.boolean "approved"
     t.index ["email"], name: "index_librarians_on_email", unique: true
     t.index ["library_id"], name: "index_librarians_on_library_id"

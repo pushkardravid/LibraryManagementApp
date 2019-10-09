@@ -4,9 +4,7 @@ class Librarian < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
   belongs_to :library
-  validates :email, presence: true, uniqueness: true
-  validates :name, presence: true
-  validates :password, presence: true
+  
 
 
   def active_for_authentication? 
