@@ -5,6 +5,9 @@ class StudentsController < ApplicationController
   # GET /students
   # GET /students.json
   def index
+  end
+
+  def list
     @students = Student.all
   end
 

@@ -7,6 +7,7 @@
       <th>Isbn</th>
       <th>Title</th>
       <th>Language</th>
+      <th>Author</th>
       <th>Published</th>
       <th>Edition</th>
       <th>Subject</th>
@@ -22,6 +23,7 @@
         <td><%= book.isbn %></td>
         <td><%= book.title %></td>
         <td><%= book.language %></td>
+        <td><%= book.author %></td>
         <td><%= book.published %></td>
         <td><%= book.edition %></td>
         <td><%= book.subject %></td>
@@ -43,7 +45,10 @@
         <% if BorrowingHistory.is_book_active?(current_student.id, book.id)%>
         <td><%= button_to 'Return', return_path(book) %></td>
         <% else %>
-        <% if BookLibraryMapping.fetch_book_quantity(book.id) != 0 and !book.special%>
+        <% student_borrowed_books_count = BorrowingHistory.fetch_all_active_books_by_student(current_student.id).count %>
+        <% student_allowed_count = StaticData::BOOK_SPECIFICATIONS[current_student.educational_level.to_sym] %>
+    
+        <% if BookLibraryMapping.fetch_book_quantity(book.id) != 0 and !book.special and student_borrowed_books_count < student_allowed_count %>
         <td><%= button_to 'Checkout', checkout_path(book) %></td>
         <% else %>
         <% if BookHoldRequest.is_requested?(current_student.id, book.id)%>

@@ -35,4 +35,6 @@ Rails.application.routes.draw do
 
   get 'libraries_overdue/:id' => 'libraries#overdue_books', :as => :libraries_overdue
 
+  get 'list_students/' => 'students#list', :as => :list_students
+
 end

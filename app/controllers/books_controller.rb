@@ -75,6 +75,7 @@ class BooksController < ApplicationController
     @book.isbn = params[:book][:isbn]
     @book.title = params[:book][:title]
     @book.language = params[:book][:language]
+    @book.author = params[:book][:author]
     @book.published = params[:book][:published]
     @book.edition = params[:book][:edition]
     @book.image = params[:book][:image]
@@ -145,6 +146,7 @@ class BooksController < ApplicationController
     student_allowed_count = StaticData::BOOK_SPECIFICATIONS[current_student.educational_level.to_sym]
     
     if student_borrowed_books_count >= student_allowed_count
+      flash[:notice] =  "You have already maxed out your allowed checkouts. Creating the hold request for this book."
       return request_book
     end
 
@@ -217,7 +219,7 @@ class BooksController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def book_params
-      params.require(:book).permit(:isbn, :title, :language, :published, :edition, :image, :subject, :summary, :special)
+      params.require(:book).permit(:isbn, :title, :language, :author, :published, :edition, :image, :subject, :summary, :special)
       # params.require(:library)
       # params.require(:quantity)
     end
