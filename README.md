@@ -12,6 +12,4 @@
 ### Few Guildlines:
 
 - Use 'Home' or 'Library Management App' link to nagivate back to dashboard page , in case you feel lost along the way.
-
-
-**Under development**
+- To test the email functionality, please register a student/librarian with a gmail/publicily available email provider and not an enterprise one.
