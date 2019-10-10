@@ -31,7 +31,7 @@ gem 'bootsnap', '>= 1.4.2', require: false
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
-  gem 'rspec-rails', '~> 3.5'
+  gem 'rspec-rails', '~> 4.0.0.beta2'
   gem 'cucumber-rails', require: false
 end
 
@@ -59,3 +59,4 @@ gem 'devise'
 gem 'seed_dump'
 gem 'omniauth-facebook'
 gem 'carrierwave', '~> 2.0'
+gem 'rails-controller-testing'
