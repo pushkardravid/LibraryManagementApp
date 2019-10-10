@@ -1,13 +1,4 @@
 <% if current_student %>
-<p id="notice"><%= notice %></p>
-
-<%= link_to "View all books", books_path %><br/>
-<%= link_to "View all bookmarked books", view_bookmark_path %><br/>
-<%= link_to "View all libraries",libraries_path %><br/>
-<%= link_to "View all hold requests",student_hold_requests_path %><br/>
-<%= link_to "View all checked out books", view_student_checkouts_path %><br/>
-
-
 
 <p id="notice"><%= notice %></p>
 
@@ -36,7 +27,7 @@
     <img src="https://www.ncsu.edu/huntlibrary/img/inspire/1.jpg" class="card-img-top" alt="...">
     <div class="card-body">
       <h5 class="card-title">Library operations</h5>
-      <p class="card-text">You can view all the libraries that belong to your university</p>
+      <p class="card-text">You can view all the libraries that belong to your university and books that library subsumes. </p>
       <a href=<%= libraries_path %> class="btn btn-primary">View all libraries</a><br><br>
     </div>
   </div>

@@ -1,6 +1,6 @@
 class LibrariesController < ApplicationController
   before_action :set_library, only: [:show, :edit, :update, :destroy]
-  before_action :test_user
+  before_action :test_user, only: [:edit, :update, :destroy]
 
   def test_user
 		if not (admin_signed_in? or  librarian_signed_in?)
