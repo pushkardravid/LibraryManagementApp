@@ -20,6 +20,9 @@ class Library < ApplicationRecord
             end
         }
         overdue_books
-      end
+    end
 
+    def self.fetch_libraries_by_university(university_id)
+        Library.all.select {|l| l.university_id == university_id}
+    end
 end

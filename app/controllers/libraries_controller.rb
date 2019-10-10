@@ -16,6 +16,8 @@ class LibrariesController < ApplicationController
     elsif current_librarian
       library_id = current_librarian.library_id
       @libraries = Array.new.push(Library.find(library_id))
+    elsif current_student
+      @libraries = Library.fetch_libraries_by_university(current_student.university_id)
     end
   end
 

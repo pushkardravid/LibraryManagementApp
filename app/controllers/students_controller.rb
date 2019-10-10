@@ -9,6 +9,7 @@ class StudentsController < ApplicationController
 
   def list
     @students = Student.all
+    render "_list"
   end
 
   # GET /students/1
