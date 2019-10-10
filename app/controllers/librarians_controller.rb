@@ -57,6 +57,7 @@ class LibrariansController < ApplicationController
     librarian_obj = Librarian.where(id: librarian_id).first
     librarian_obj.approved = true
     librarian_obj.save
+    ExampleMailer.sample_email(librarian_obj).deliver
     redirect_to('/admin_dashboard')
   end
   

@@ -25,8 +25,8 @@
 </div>
 
 
-<% else %>
-    <span> Login as Student to view this page... </span>
+<% elsif current_admin %>
+<%= render "students/list", :@students => @students%>
 <% end %>
 
 

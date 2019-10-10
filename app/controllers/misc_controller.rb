@@ -15,7 +15,6 @@ class MiscController < ApplicationController
 	end
 
 	def librarian_dashboard
-		ExampleMailer.sample_email(current_librarian).deliver
 	end
 
 end

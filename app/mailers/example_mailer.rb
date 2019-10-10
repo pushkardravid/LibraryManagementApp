@@ -4,7 +4,14 @@ class ExampleMailer < ApplicationMailer
     def sample_email(user)
         puts 'start'
         @user = user
-        mail(to: 'shikhad07@gmail.com', subject: 'Sample Email')
+        mail(to: @user.email, subject: 'Sample Email')
+        puts 'end'
+    end
+
+    def librarian_email(user)
+        puts 'start'
+        @user = user
+        mail(to: @user.email, subject: 'Account approved')
         puts 'end'
     end
 
