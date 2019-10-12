@@ -6,7 +6,7 @@
 
 *Admin Credentials*
 
-- Email: admin@system.edu
+- Email: admin@system.com
 - Password: password
 
 ### Few Guildlines:
