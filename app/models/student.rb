@@ -38,7 +38,7 @@ end
     checkout_books = BorrowingHistory.fetch_all_active_books_by_student(student_id)
 
     checkout_books.map { |checkout_book|
-      library_id = BookLibraryMapping.fetch_library_for_book(checkout_books.book_id)
+      library_id = BookLibraryMapping.fetch_library_for_book(checkout_book.book_id)
 
       if not library_id.nil?
         library = Library.find(library_id)
