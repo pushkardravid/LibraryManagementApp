@@ -172,11 +172,11 @@ class BooksController < ApplicationController
       @book_hold_request.library_id = BookLibraryMapping.fetch_library_for_book(@book.id)
 
       if @book.special
-        @book_hold_request.reason = "special"
+        @book_hold_request.reason = 0
       elsif BookLibraryMapping.fetch_book_quantity(@book.id) == 0
-        @book_hold_request.reason = "unavailable"
+        @book_hold_request.reason = 1
       else
-        @book_hold_request.reason = "max_reached"
+        @book_hold_request.reason = 2
       end
       
       if @book_hold_request.save
